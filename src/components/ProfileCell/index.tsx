@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import axios from 'axios'
 import { Trash2 } from 'lucide-react'
-import tw from 'twin.macro'
 
 import { Button } from '@/components/ui/button'
 import { useConfirm } from '@/components/UIProvider'
@@ -115,12 +114,12 @@ const ProfileCell: React.FC<ProfileCellProps> = ({
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
               )}
               <span
-                css={[
-                  tw`relative inline-flex rounded-full h-3 w-3`,
-                  available === undefined && tw`bg-gray-500`,
-                  available === true && tw`bg-green-500`,
-                  available === false && tw`bg-red-500`,
-                ]}
+                className={cn(
+                  'relative inline-flex h-3 w-3 rounded-full',
+                  available === undefined && 'bg-gray-500',
+                  available === true && 'bg-green-500',
+                  available === false && 'bg-red-500',
+                )}
               />
             </div>
           )}

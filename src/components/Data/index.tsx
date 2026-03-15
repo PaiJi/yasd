@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import tw from 'twin.macro'
 
 import { cn } from '@/utils/shadcn'
 
@@ -36,6 +35,17 @@ export const DataGroup: React.FC<{
 
 export const DataRow = styled.div``
 
-export const DataRowSub = styled.div`
-  ${tw`flex items-center justify-between px-3 md:px-5 leading-normal text-xs lg:text-sm lg:leading-relaxed`}
-`
+export const DataRowSub: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+  className,
+  ...props
+}) => {
+  return (
+    <div
+      className={cn(
+        'flex items-center justify-between px-3 md:px-5 leading-normal text-xs lg:text-sm lg:leading-relaxed',
+        className,
+      )}
+      {...props}
+    />
+  )
+}

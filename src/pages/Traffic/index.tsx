@@ -2,7 +2,6 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import tw from 'twin.macro'
 
 import { DataGroup, DataRow, DataRowMain } from '@/components/Data'
 import HorizontalSafeArea from '@/components/HorizontalSafeArea'
@@ -13,8 +12,6 @@ import { ConnectorTraffic, Traffic } from '@/types'
 import TrafficDataRow from './components/TrafficDataRow'
 
 dayjs.extend(relativeTime)
-
-const TrafficWrapper = tw.div`p-4 md:p-5 space-y-4 md:space-y-5`
 
 export const Component: React.FC = () => {
   const { t } = useTranslation()
@@ -45,7 +42,7 @@ export const Component: React.FC = () => {
 
       <HorizontalSafeArea>
         {startTime && (
-          <TrafficWrapper>
+          <div className="space-y-4 p-4 md:space-y-5 md:p-5">
             <DataGroup>
               <DataRow>
                 <DataRowMain>
@@ -76,7 +73,7 @@ export const Component: React.FC = () => {
                 return <TrafficDataRow key={name} name={name} data={data} />
               })}
             </DataGroup>
-          </TrafficWrapper>
+          </div>
         )}
       </HorizontalSafeArea>
     </>

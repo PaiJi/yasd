@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Loader2Icon, ZapIcon } from 'lucide-react'
-import tw from 'twin.macro'
 import useIsInViewport from 'use-is-in-viewport'
 
 import { StatusChip } from '@/components/StatusChip'
@@ -28,10 +27,6 @@ type LocalLatency = {
   latency: number
   error?: string | null
 }
-
-const LoadingOverlay = tw.div`
-  absolute top-0 right-0 bottom-0 left-0 bg-neutral-200 bg-opacity-90 flex items-center justify-center
-`
 
 const latencyResultStyle = (latency: number) => {
   if (latency < 0) {
@@ -293,9 +288,9 @@ const PolicyGroup: React.FC<PolicyGroupProps> = ({
     <div ref={targetRef}>
       <Card className="relative overflow-hidden">
         {isLoading ? (
-          <LoadingOverlay>
+          <div className="absolute inset-0 flex items-center justify-center bg-neutral-200/90">
             <Loader2Icon className="text-neutral-600 h-8 w-8 animate-spin" />
-          </LoadingOverlay>
+          </div>
         ) : null}
 
         {cardInner}

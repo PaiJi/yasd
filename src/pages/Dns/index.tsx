@@ -5,7 +5,6 @@ import { List, AutoSizer, ListRowRenderer } from 'react-virtualized'
 import { css } from '@emotion/react'
 import { SearchIcon } from 'lucide-react'
 import useSWR, { mutate } from 'swr'
-import tw from 'twin.macro'
 
 import HorizontalSafeArea from '@/components/HorizontalSafeArea'
 import { ListCell } from '@/components/ListCell'
@@ -168,8 +167,8 @@ const ComponentBase: React.FC = () => {
                   outline: 'none',
                 }}
                 css={css`
-                  & > div {
-                    ${tw`divide-y`}
+                  & > div > :not([hidden]) ~ :not([hidden]) {
+                    border-top-width: 1px;
                   }
                 `}
               />

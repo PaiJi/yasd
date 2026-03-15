@@ -1,6 +1,6 @@
 import { defineConfig } from 'bumpp'
 
 export default defineConfig({
-  execute: 'pnpm changelog',
+  execute: 'vp run changelog',
   all: true,
 })

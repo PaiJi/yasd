@@ -3,7 +3,6 @@ import { css } from '@emotion/react'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { Loader2 } from 'lucide-react'
-import tw from 'twin.macro'
 
 import { cn } from '@/utils/shadcn'
 
@@ -88,7 +87,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           size === 'icon' &&
             css`
               & > * {
-                ${tw`w-4 h-4`};
+                width: 1rem;
+                height: 1rem;
               }
             `,
         ]}

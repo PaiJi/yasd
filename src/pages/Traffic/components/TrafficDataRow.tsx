@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next'
 import { css } from '@emotion/react'
 import bytes from 'bytes'
 import { ChevronRight } from 'lucide-react'
-import tw from 'twin.macro'
 
 import { DataRow, DataRowMain, DataRowSub } from '@/components/Data'
 import { ConnectorTraffic } from '@/types'
+import { cn } from '@/utils/shadcn'
 
 interface TrafficDataRowProps {
   name: string
@@ -32,9 +32,10 @@ const TrafficDataRow: React.FC<TrafficDataRowProps> = ({ name, data }) => {
   return (
     <DataRow
       css={css`
-        ${tw`cursor-pointer`}
+        cursor: pointer;
+
         .ReactCollapse--collapse {
-          ${tw`transition-all duration-200 ease-in-out`}
+          transition: all 200ms ease-in-out;
         }
       `}
       key={name}
@@ -47,10 +48,10 @@ const TrafficDataRow: React.FC<TrafficDataRowProps> = ({ name, data }) => {
             {t('traffic.total')} {bytes(data.in + data.out)}
           </div>
           <ChevronRight
-            css={[
-              tw`ml-2 -mr-1 w-5 h-5 transition-transform duration-200 ease-in-out`,
-              isDetailsOpen && tw`transform rotate-90`,
-            ]}
+            className={cn(
+              'ml-2 -mr-1 h-5 w-5 transition-transform duration-200 ease-in-out',
+              isDetailsOpen && 'rotate-90',
+            )}
           />
         </div>
       </DataRowMain>

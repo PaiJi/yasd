@@ -2,15 +2,12 @@ import React, { lazy, Suspense, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { css } from '@emotion/react'
 import bytes from 'bytes'
-import tw from 'twin.macro'
 
 import { useInterfaces } from '@/store'
 import { ConnectorTraffic } from '@/types'
+import { cn } from '@/utils/shadcn'
 
 const LineChart = lazy(() => import('./components/LineChart'))
-const Cell = tw.div`px-4 py-3`
-const Title = tw.div`text-xs text-muted-foreground leading-relaxed`
-const Data = tw.div`text-base md:text-lg text-gray-700 dark:text-white/90 font-bold leading-normal tabular-nums`
 
 const LineChartLoader = () => (
   <div
@@ -124,3 +121,37 @@ const TrafficCell: React.FC = () => {
 }
 
 export default TrafficCell
+
+const Cell: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+  className,
+  ...props
+}) => {
+  return <div className={cn('px-4 py-3', className)} {...props} />
+}
+
+const Title: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+  className,
+  ...props
+}) => {
+  return (
+    <div
+      className={cn('text-xs text-muted-foreground leading-relaxed', className)}
+      {...props}
+    />
+  )
+}
+
+const Data: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+  className,
+  ...props
+}) => {
+  return (
+    <div
+      className={cn(
+        'text-base md:text-lg text-gray-700 dark:text-white/90 font-bold leading-normal tabular-nums',
+        className,
+      )}
+      {...props}
+    />
+  )
+}

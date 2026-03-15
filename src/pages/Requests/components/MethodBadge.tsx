@@ -1,6 +1,5 @@
 import React from 'react'
 import { css, type Interpolation, type Theme } from '@emotion/react'
-import tw from 'twin.macro'
 
 import { isTruthy } from '@/utils'
 import { cn } from '@/utils/shadcn'
@@ -22,18 +21,21 @@ const MethodBadge: React.FC<MethodBadgeProps> = ({
 }) => {
   return (
     <div
-      className={cn('rounded px-1 text-white inline-block', className)}
+      className={cn(
+        'rounded px-1 text-white inline-block',
+        isTruthy(failed)
+          ? 'bg-red-500'
+          : status === 'Active'
+            ? 'bg-green-500'
+            : 'bg-blue-500',
+        className,
+      )}
       css={[
         css`
           height: 1rem;
           line-height: 1rem;
           font-size: 0.5rem;
         `,
-        isTruthy(failed)
-          ? tw`bg-red-500`
-          : status === 'Active'
-            ? tw`bg-green-500`
-            : tw`bg-blue-500`,
         cssProp,
       ]}
       {...args}

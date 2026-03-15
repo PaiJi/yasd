@@ -13,7 +13,7 @@ await (async () => {
     throw new Error('Invalid build target.')
   }
 
-  await $`pnpm verify-translation`
+  await $`vp run verify-translation`
   await clean()
   console.info('🚧  Build artifact')
 
@@ -24,7 +24,7 @@ await (async () => {
     case 'release-vercel':
       process.env.NODE_ENV = 'production'
       process.env.VITE_USE_SW = 'true'
-      await $`vite build`
+      await $`vp build`
       await insertSashimiScript()
 
       break
@@ -32,7 +32,7 @@ await (async () => {
     case 'release-ci':
       process.env.NODE_ENV = 'production'
       process.env.VITE_HASH_ROUTER = 'true'
-      await $`vite build`
+      await $`vp build`
       await changeManifest({
         start_url: `${getUrlPathPrefix()}/#/home`,
       })
@@ -45,7 +45,7 @@ await (async () => {
       process.env.VITE_HASH_ROUTER = 'true'
       process.env.VITE_RUN_IN_SURGE = 'true'
       process.env.VITE_URL_PATH_PREFIX = '/web'
-      await $`vite build`
+      await $`vp build`
       await changeManifest({
         short_name: 'Dashboard',
         name: 'Surge Web Dashboard',
@@ -59,7 +59,7 @@ await (async () => {
     default:
       process.env.NODE_ENV = 'production'
       process.env.VITE_USE_SW = 'true'
-      await $`vite build`
+      await $`vp build`
 
       if (process.env.VITE_HASH_ROUTER === 'true') {
         await changeManifest({

@@ -2,14 +2,12 @@ import React, { useCallback, useMemo } from 'react'
 import { toast } from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
 import { css } from '@emotion/react'
-import styled from '@emotion/styled'
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 import bytes from 'bytes'
 import dayjs from 'dayjs'
 import { Search } from 'lucide-react'
 import { basename } from 'path-browserify'
 import { mutate } from 'swr'
-import tw from 'twin.macro'
 import { useMediaQuery } from 'usehooks-ts'
 
 import CodeContent from '@/components/CodeContent'
@@ -27,9 +25,7 @@ import { RequestItem } from '@/types'
 import { isFalsy, isTruthy, onlyIP } from '@/utils'
 import fetcher from '@/utils/fetcher'
 
-const TabsContent = styled(TabsContentOriginal)`
-  ${tw``}
-`
+const TabsContent = TabsContentOriginal
 
 type RequestModalProps = {
   req: RequestItem | null

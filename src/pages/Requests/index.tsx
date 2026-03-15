@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom'
 import { List, AutoSizer, ListRowRenderer } from 'react-virtualized'
 import { css } from '@emotion/react'
 import { ActivityIcon, HistoryIcon } from 'lucide-react'
-import tw from 'twin.macro'
 
 import BottomPanel from '@/components/BottomPanel'
 import { ListCell } from '@/components/ListCell'
@@ -138,8 +137,13 @@ export const Component: React.FC = () => {
                     css={css`
                       outline: none;
 
-                      & > div {
-                        ${tw`divide-y divide-gray-200 dark:divide-white/10`}
+                      & > div > :not([hidden]) ~ :not([hidden]) {
+                        border-top-width: 1px;
+                        border-color: rgb(229 231 235 / 1);
+                      }
+
+                      .dark & > div > :not([hidden]) ~ :not([hidden]) {
+                        border-color: rgb(255 255 255 / 0.1);
                       }
                     `}
                   />
