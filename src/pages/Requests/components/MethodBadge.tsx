@@ -1,5 +1,5 @@
 import React from 'react'
-import { css } from '@emotion/react'
+import { css, type Interpolation, type Theme } from '@emotion/react'
 import tw from 'twin.macro'
 
 import { isTruthy } from '@/utils'
@@ -9,6 +9,7 @@ type MethodBadgeProps = {
   failed: 1 | 0 | boolean
   method: string
   status: string
+  css?: Interpolation<Theme>
 } & React.HTMLAttributes<HTMLDivElement>
 
 const MethodBadge: React.FC<MethodBadgeProps> = ({

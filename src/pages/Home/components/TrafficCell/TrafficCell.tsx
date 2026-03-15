@@ -49,9 +49,10 @@ const TrafficCell: React.FC = () => {
   }, [interfaces])
 
   const betterSpeedString = (speed: number, isCircular: boolean = true) => {
-    const readableString = bytes(speed, {
-      unitSeparator: '---',
-    })
+    const readableString =
+      bytes(speed, {
+        unitSeparator: '---',
+      }) ?? '0---B'
     const [value, unit] = readableString.split('---')
 
     return (

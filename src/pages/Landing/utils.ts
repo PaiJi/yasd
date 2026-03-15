@@ -50,7 +50,7 @@ export const getSurgeHost = (): {
   hostname: string
   port: string
 } => {
-  if (process.env.NODE_ENV === 'production') {
+  if (import.meta.env.PROD) {
     const protocol = window.location.protocol
     const port = window.location.port
       ? window.location.port
@@ -66,8 +66,8 @@ export const getSurgeHost = (): {
   }
 
   return {
-    protocol: process.env.REACT_APP_PROTOCOL as string,
-    hostname: process.env.REACT_APP_HOST as string,
-    port: process.env.REACT_APP_PORT as string,
+    protocol: import.meta.env.VITE_PROTOCOL as string,
+    hostname: import.meta.env.VITE_HOST as string,
+    port: import.meta.env.VITE_PORT as string,
   }
 }

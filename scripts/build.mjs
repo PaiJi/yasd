@@ -13,7 +13,7 @@ await (async () => {
     throw new Error('Invalid build target.')
   }
 
-  await $`yarn verify-translation`
+  await $`pnpm verify-translation`
   await clean()
   console.info('🚧  Build artifact')
 
@@ -23,17 +23,16 @@ await (async () => {
   switch (target) {
     case 'release-vercel':
       process.env.NODE_ENV = 'production'
-      process.env.REACT_APP_USE_SW = 'true'
-      await $`craco build`
+      process.env.VITE_USE_SW = 'true'
+      await $`vite build`
       await insertSashimiScript()
 
       break
 
     case 'release-ci':
       process.env.NODE_ENV = 'production'
-      process.env.REACT_APP_HASH_ROUTER = 'true'
-      process.env.PUBLIC_URL = getUrlPathPrefix()
-      await $`craco build`
+      process.env.VITE_HASH_ROUTER = 'true'
+      await $`vite build`
       await changeManifest({
         start_url: `${getUrlPathPrefix()}/#/home`,
       })
@@ -43,11 +42,10 @@ await (async () => {
 
     case 'surge':
       process.env.NODE_ENV = 'production'
-      process.env.REACT_APP_HASH_ROUTER = 'true'
-      process.env.REACT_APP_RUN_IN_SURGE = 'true'
-      process.env.REACT_APP_URL_PATH_PREFIX = '/web'
-      process.env.PUBLIC_URL = getUrlPathPrefix()
-      await $`craco build`
+      process.env.VITE_HASH_ROUTER = 'true'
+      process.env.VITE_RUN_IN_SURGE = 'true'
+      process.env.VITE_URL_PATH_PREFIX = '/web'
+      await $`vite build`
       await changeManifest({
         short_name: 'Dashboard',
         name: 'Surge Web Dashboard',
@@ -60,11 +58,10 @@ await (async () => {
 
     default:
       process.env.NODE_ENV = 'production'
-      process.env.REACT_APP_USE_SW = 'true'
-      process.env.PUBLIC_URL = getUrlPathPrefix()
-      await $`craco build`
+      process.env.VITE_USE_SW = 'true'
+      await $`vite build`
 
-      if (process.env.REACT_APP_HASH_ROUTER === 'true') {
+      if (process.env.VITE_HASH_ROUTER === 'true') {
         await changeManifest({
           start_url: `${getUrlPathPrefix()}/#/home`,
         })
@@ -105,7 +102,7 @@ async function clean() {
 }
 
 function getUrlPathPrefix() {
-  return 'REACT_APP_URL_PATH_PREFIX' in process.env
-    ? process.env.REACT_APP_URL_PATH_PREFIX
+  return 'VITE_URL_PATH_PREFIX' in process.env
+    ? process.env.VITE_URL_PATH_PREFIX
     : ''
 }

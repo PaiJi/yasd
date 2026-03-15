@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node-version: [20]
+        node-version: [24]
 
     steps:
       - uses: actions/checkout@v4
@@ -20,23 +20,16 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+      - name: Enable Corepack
+        run: corepack enable
 
-      - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: yarn install, build, bundle
+      - name: pnpm install, build, bundle
         run: |
-          yarn install
-          CI=false yarn build:release
+          pnpm install --frozen-lockfile
+          CI=false pnpm build:release
 
       - name: Upload Release Asset
         id: upload-release-asset

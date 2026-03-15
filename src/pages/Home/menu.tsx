@@ -55,8 +55,8 @@ const menu: Array<MenuItem> = [
     isEnabled: (platform, platformVersion) => {
       return Boolean(
         platform === 'macos' &&
-          platformVersion &&
-          gte(platformVersion, '4.0.6'),
+        platformVersion &&
+        gte(platformVersion, '4.0.6'),
       )
     },
   },

@@ -1,10 +1,9 @@
 import React, { useState, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
-import { List, AutoSizer } from 'react-virtualized'
+import { List, AutoSizer, ListRowRenderer } from 'react-virtualized'
 import { css } from '@emotion/react'
 import { ActivityIcon, HistoryIcon } from 'lucide-react'
-import { ListRowRenderer } from 'react-virtualized/dist/es/List'
 import tw from 'twin.macro'
 
 import BottomPanel from '@/components/BottomPanel'

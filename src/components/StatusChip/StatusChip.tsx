@@ -23,7 +23,8 @@ const chipVariants = cva('inline-block font-medium ring-1 ring-inset', {
 })
 
 export interface StatusChipProps
-  extends React.ButtonHTMLAttributes<HTMLDivElement>,
+  extends
+    React.ButtonHTMLAttributes<HTMLDivElement>,
     VariantProps<typeof chipVariants> {
   text?: string
 }
