@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { cva, VariantProps } from 'class-variance-authority'
+import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/utils/shadcn'
 
-const variants = cva('flex items-center space-x-3', {
+const variants = cva('flex items-center gap-3', {
   variants: {
     align: {
       left: 'justify-start',

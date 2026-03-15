@@ -1,18 +1,12 @@
 /// <reference types="vite-plus/test/config" />
 
 import { readFileSync } from 'node:fs'
-import { createRequire } from 'node:module'
 import { fileURLToPath, URL } from 'node:url'
 
-import autoprefixer from 'autoprefixer'
-import type { PluginCreator } from 'postcss'
+import tailwindcss from '@tailwindcss/postcss'
 import react from '@vitejs/plugin-react'
-import tailwindcss from 'tailwindcss'
 import { loadEnv } from 'vite-plus'
 import { VitePWA } from 'vite-plugin-pwa'
-
-const require = createRequire(import.meta.url)
-const postcssImport = require('postcss-import') as PluginCreator<unknown>
 
 const ignoredPaths = [
   '.agents/**',
@@ -80,7 +74,7 @@ const config = {
   base: getBasePath(urlPathPrefix),
   css: {
     postcss: {
-      plugins: [postcssImport, tailwindcss, autoprefixer],
+      plugins: [tailwindcss()],
     },
   },
   plugins: [

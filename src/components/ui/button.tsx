@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { css } from '@emotion/react'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { Loader2 } from 'lucide-react'
@@ -7,7 +6,7 @@ import { Loader2 } from 'lucide-react'
 import { cn } from '@/utils/shadcn'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
   {
     variants: {
       variant: {
@@ -26,7 +25,7 @@ const buttonVariants = cva(
         default: 'h-9 px-4 py-2',
         sm: 'h-8 rounded-md px-3 text-xs',
         lg: 'h-10 rounded-md px-8',
-        icon: 'h-9 w-9',
+        icon: 'size-9',
       },
       stretch: {
         true: 'w-full',
@@ -69,12 +68,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     if (isLoading) {
       return (
         <Comp
+          aria-busy
           className={cn(buttonVariants({ stretch, variant, size, className }))}
           disabled
           ref={ref}
           {...props}
         >
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          <Loader2 className="animate-spin" />
           {loadingLabel}
         </Comp>
       )
@@ -83,15 +83,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <Comp
         className={cn(buttonVariants({ stretch, variant, size, className }))}
-        css={[
-          size === 'icon' &&
-            css`
-              & > * {
-                width: 1rem;
-                height: 1rem;
-              }
-            `,
-        ]}
         ref={ref}
         {...props}
       />
