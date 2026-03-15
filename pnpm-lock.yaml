@@ -117,7 +117,7 @@ importers:
         specifier: ^1.0.3
         version: 1.0.3
       '@types/react':
-        specifier: ^19.2.14
+        specifier: ^19
         version: 19.2.14
       '@types/react-collapse':
         specifier: ^5.0.4

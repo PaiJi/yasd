@@ -1,12 +1,11 @@
-/// <reference types="vite-plus/test/config" />
-
-import { readFileSync } from 'node:fs'
 import { fileURLToPath, URL } from 'node:url'
 
 import tailwindcss from '@tailwindcss/postcss'
 import react from '@vitejs/plugin-react'
-import { loadEnv } from 'vite-plus'
+import { loadEnv, defineConfig } from 'vite-plus'
 import { VitePWA } from 'vite-plugin-pwa'
+
+import packageJson from './package.json' with { type: 'json' }
 
 const ignoredPaths = [
   '.agents/**',
@@ -18,7 +17,28 @@ const ignoredPaths = [
   'src/utils/shadcn.ts',
 ]
 
-const vitePlusConfig = {
+const mode =
+  process.env.VITEST === 'true'
+    ? 'test'
+    : process.env.NODE_ENV === 'production'
+      ? 'production'
+      : 'development'
+const env = loadEnv(mode, process.cwd(), '')
+const urlPathPrefix =
+  process.env.VITE_URL_PATH_PREFIX ?? env.VITE_URL_PATH_PREFIX ?? ''
+const runInSurge =
+  (process.env.VITE_RUN_IN_SURGE ?? env.VITE_RUN_IN_SURGE) === 'true'
+const isTest = process.env.VITEST === 'true'
+
+const getBasePath = (urlPathPrefix = '') => {
+  if (!urlPathPrefix) {
+    return '/'
+  }
+
+  return urlPathPrefix.endsWith('/') ? urlPathPrefix : `${urlPathPrefix}/`
+}
+
+const config = defineConfig({
   fmt: {
     semi: false,
     useTabs: false,
@@ -42,35 +62,6 @@ const vitePlusConfig = {
   staged: {
     '*.{js,jsx,ts,tsx}': 'vp check --fix',
   },
-}
-
-const pkg = JSON.parse(
-  readFileSync(new URL('./package.json', import.meta.url), 'utf8'),
-) as { version: string }
-
-const mode =
-  process.env.VITEST === 'true'
-    ? 'test'
-    : process.env.NODE_ENV === 'production'
-      ? 'production'
-      : 'development'
-const env = loadEnv(mode, process.cwd(), '')
-const urlPathPrefix =
-  process.env.VITE_URL_PATH_PREFIX ?? env.VITE_URL_PATH_PREFIX ?? ''
-const runInSurge =
-  (process.env.VITE_RUN_IN_SURGE ?? env.VITE_RUN_IN_SURGE) === 'true'
-const isTest = process.env.VITEST === 'true'
-
-const getBasePath = (urlPathPrefix = '') => {
-  if (!urlPathPrefix) {
-    return '/'
-  }
-
-  return urlPathPrefix.endsWith('/') ? urlPathPrefix : `${urlPathPrefix}/`
-}
-
-const config = {
-  ...vitePlusConfig,
   base: getBasePath(urlPathPrefix),
   css: {
     postcss: {
@@ -110,7 +101,7 @@ const config = {
     include: ['react-virtualized'],
   },
   define: {
-    'import.meta.env.VITE_VERSION': JSON.stringify(pkg.version),
+    'import.meta.env.VITE_VERSION': JSON.stringify(packageJson.version),
   },
   build: {
     outDir: 'build',
@@ -125,6 +116,6 @@ const config = {
       reporter: ['text', 'html'],
     },
   },
-}
+})
 
 export default config
