@@ -55,7 +55,7 @@ export const Component: React.FC = () => {
 
   const addHistory = useCallback(
     (profile: Profile): void => {
-      dispatch(
+      void dispatch(
         historyActions.addHistory({
           profile,
           remember: getValues('keepCredential'),
@@ -82,7 +82,7 @@ export const Component: React.FC = () => {
 
   const deleteHistory = useCallback(
     (id: string) => {
-      dispatch(
+      void dispatch(
         historyActions.deleteHistory({
           id,
         }),

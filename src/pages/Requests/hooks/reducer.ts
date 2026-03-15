@@ -85,7 +85,7 @@ const requestListReducer: Reducer<
         lastUpdated: new Date(),
       }
     default:
-      throw new Error(`Unknown action type: ${action}`)
+      throw new Error('Unknown action type')
   }
 }
 

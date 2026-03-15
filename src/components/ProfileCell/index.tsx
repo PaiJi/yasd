@@ -136,7 +136,7 @@ const ProfileCell: React.FC<ProfileCellProps> = ({
             onClick={(e) => {
               e.stopPropagation()
               e.preventDefault()
-              deleteHandler()
+              void deleteHandler()
             }}
             title={'delete profile'}
             size="icon"

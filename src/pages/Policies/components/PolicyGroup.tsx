@@ -202,7 +202,7 @@ const PolicyGroup: React.FC<PolicyGroupProps> = ({
     let isMounted = true
 
     if (isInViewport && !selection) {
-      refreshSelection().then((policy) => {
+      void refreshSelection().then((policy) => {
         if (isMounted) {
           setSelection(policy)
         }

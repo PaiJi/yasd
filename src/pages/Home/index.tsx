@@ -44,7 +44,7 @@ export const Component: React.FC = () => {
 
   const toggleSystemProxy = useCallback(async () => {
     try {
-      fetcher({
+      await fetcher({
         method: 'POST',
         url: '/features/system_proxy',
         data: {

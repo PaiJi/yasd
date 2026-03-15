@@ -33,7 +33,7 @@ export const Component: React.FC = () => {
   const headerRef = useRef<HTMLDivElement>(null)
   const { data: policyPerformanceResults } = usePolicyPerformance()
 
-  const getRefTop = (ref: RefObject<HTMLDivElement>): number => {
+  const getRefTop = (ref: RefObject<HTMLDivElement | null>): number => {
     const ele = ref.current
     const headerEle = headerRef.current
 

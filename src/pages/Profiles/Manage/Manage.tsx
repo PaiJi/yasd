@@ -138,7 +138,7 @@ export const Component = () => {
                 isValidatingCurrentProfileValidation
               }
               onClick={() => {
-                onReloadProfile()
+                void onReloadProfile()
               }}
               hideArrow
               destructive
@@ -199,7 +199,7 @@ export const Component = () => {
                 <DataRowMain
                   onClick={() => {
                     if (selectedProfile) {
-                      onSelectProfile(selectedProfile)
+                      void onSelectProfile(selectedProfile)
                     }
                   }}
                   destructive

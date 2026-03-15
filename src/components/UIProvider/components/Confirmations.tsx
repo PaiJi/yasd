@@ -34,7 +34,7 @@ const Confirmation = ({
         confirmation.onConfirm()
       }
 
-      cleanConfirmation(index)
+      void cleanConfirmation(index)
     },
     [cleanConfirmation],
   )
@@ -45,7 +45,7 @@ const Confirmation = ({
         confirmation.onCancel()
       }
 
-      cleanConfirmation(index)
+      void cleanConfirmation(index)
     },
     [cleanConfirmation],
   )

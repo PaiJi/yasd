@@ -71,7 +71,7 @@ const ComponentBase: React.FC = () => {
                     {script.type === 'cron' && (
                       <Button
                         onClick={() => {
-                          evaluate(script.name, index)
+                          void evaluate(script.name, index)
                         }}
                         isLoading={isLoading === index}
                         loadingLabel={t('scripting.running')}

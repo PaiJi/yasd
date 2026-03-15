@@ -35,7 +35,7 @@ if (import.meta.env.VITE_USE_SW === 'true') {
 
 if (!('scrollBehavior' in document.documentElement.style)) {
   // @ts-ignore
-  import('smoothscroll-polyfill').then((mod) => {
+  void import('smoothscroll-polyfill').then((mod) => {
     mod.polyfill()
   })
 }

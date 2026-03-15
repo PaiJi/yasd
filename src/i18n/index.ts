@@ -3,7 +3,7 @@ import i18n from 'i18next'
 import ChainedBackend from 'i18next-chained-backend'
 import resourcesToBackend from 'i18next-resources-to-backend'
 
-i18n
+void i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .use(ChainedBackend)
   .init({

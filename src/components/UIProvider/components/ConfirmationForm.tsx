@@ -61,7 +61,7 @@ export const ConfirmationForm = ({
         confirmation.onConfirm(values)
       }
 
-      cleanConfirmation(index)
+      void cleanConfirmation(index)
     },
     [cleanConfirmation, confirmation, index],
   )
@@ -71,7 +71,7 @@ export const ConfirmationForm = ({
       confirmation.onCancel()
     }
 
-    cleanConfirmation(index)
+    void cleanConfirmation(index)
   }, [cleanConfirmation, confirmation, index])
 
   const optionalFlag = (fieldName: string) => {

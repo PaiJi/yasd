@@ -21,7 +21,7 @@ const useTrafficUpdater = () => {
     if (profile === undefined) return
 
     const fetchTraffic = () => {
-      fetcher<Traffic & { nowTime: number }>({ url: '/traffic' }).then(
+      void fetcher<Traffic & { nowTime: number }>({ url: '/traffic' }).then(
         (res) => {
           res.nowTime = Date.now()
           dispatch(trafficActions.updateConnector(res.connector))
