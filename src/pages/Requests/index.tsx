@@ -163,7 +163,7 @@ export const Component: React.FC = () => {
       </div>
 
       <BottomPanel className="divide-x select-none">
-        <div className="space-x-3 mr-3">{toggles}</div>
+        <div className="space-x-3 pr-3">{toggles}</div>
         <div className="space-x-3">
           <FilterPopover
             className="ml-3"
