@@ -235,11 +235,11 @@ const RequestModal: React.FC<RequestModalProps> = ({ req, ...props }) => {
 
   return isDesktop ? (
     <Dialog {...props}>
-      <DialogContent className="h-[90%] max-w-4xl flex flex-col pt-10">
+      <DialogContent className="h-[90%] sm:max-w-3xl flex flex-col pt-10">
         <VisuallyHidden.Root>
           <DialogTitle>Request {req?.URL}</DialogTitle>
         </VisuallyHidden.Root>
-        {content}
+        <div className="pt-4">{content}</div>
       </DialogContent>
     </Dialog>
   ) : (
