@@ -77,8 +77,9 @@ const ProfileCell: React.FC<ProfileCellProps> = ({
           method: 'GET',
           headers: {
             'x-key': profile.key,
+            'cache-control': 'no-cache',
           },
-          timeout: 3000,
+          timeout: 30000,
         })
         .then(() => {
           if (isMounted) setAvailable(true)
