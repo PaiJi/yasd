@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useDeferredValue, useMemo, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
 import { List, AutoSizer, ListRowRenderer } from 'react-virtualized'
@@ -6,11 +6,11 @@ import { css } from '@emotion/react'
 import { SearchIcon } from 'lucide-react'
 import useSWR, { mutate } from 'swr'
 
-import HorizontalSafeArea from '@/components/HorizontalSafeArea'
+import BottomPanel from '@/components/BottomPanel'
 import { ListCell } from '@/components/ListCell'
 import PageTitle from '@/components/PageTitle'
 import { Button } from '@/components/ui/button'
-import { ButtonGroup } from '@/components/ui/button-group'
+import { Input } from '@/components/ui/input'
 import { Toggle } from '@/components/ui/toggle'
 import { DnsResult } from '@/types'
 import fetcher from '@/utils/fetcher'
@@ -19,16 +19,23 @@ import withProfile from '@/utils/with-profile'
 const ComponentBase: React.FC = () => {
   const { t } = useTranslation()
   const [group, setGroup] = useState<'dynamic' | 'static'>('dynamic')
+  const [search, setSearch] = useState('')
+  const deferredSearch = useDeferredValue(search)
 
   const { data: dnsResult } = useSWR<DnsResult>('/dns', fetcher, {
     revalidateOnFocus: false,
   })
   const list = useMemo(() => {
-    if (group === 'dynamic') {
-      return dnsResult?.dnsCache ?? []
-    }
-    return dnsResult?.local ?? []
-  }, [dnsResult, group])
+    const items =
+      group === 'dynamic'
+        ? (dnsResult?.dnsCache ?? [])
+        : (dnsResult?.local ?? [])
+    if (!deferredSearch) return items
+    const keyword = deferredSearch.toLowerCase()
+    return items.filter((record) =>
+      record.domain?.toLowerCase().includes(keyword),
+    )
+  }, [dnsResult, group, deferredSearch])
 
   const flushDns = () => {
     fetcher({
@@ -177,15 +184,22 @@ const ComponentBase: React.FC = () => {
         </AutoSizer>
       </div>
 
-      <HorizontalSafeArea className="flex divide-x border-t py-2 px-2">
-        <ButtonGroup className="px-3">{toggles}</ButtonGroup>
-
+      <BottomPanel className="divide-x select-none">
+        <div className="space-x-3 pr-3">{toggles}</div>
         <div className="flex items-center px-3">
-          <Button variant="outline" onClick={() => flushDns()}>
+          <Input
+            className="h-7 w-40"
+            placeholder={t('dns.search_domain')}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+        <div className="flex items-center pl-3">
+          <Button variant="outline" size="sm" onClick={() => flushDns()}>
             {t('dns.flush_dns')}
           </Button>
         </div>
-      </HorizontalSafeArea>
+      </BottomPanel>
     </>
   )
 }

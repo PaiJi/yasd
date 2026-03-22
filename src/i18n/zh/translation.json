@@ -158,7 +158,8 @@
     "dynamic": "动态记录",
     "static": "静态记录",
     "comment": "备注",
-    "view_dns": "查看 DNS 记录"
+    "view_dns": "查看 DNS 记录",
+    "search_domain": "搜索域名…"
   },
   "devices": {
     "mac_address": "MAC 地址",
