@@ -68,7 +68,7 @@ const RequestModal: React.FC<RequestModalProps> = ({ req, ...props }) => {
   const content = req ? (
     <>
       <div
-        className="flex-1 overflow-hidden"
+        className="flex-1 overflow-hidden flex"
         css={css`
           & > div {
             height: 100%;
@@ -78,7 +78,7 @@ const RequestModal: React.FC<RequestModalProps> = ({ req, ...props }) => {
           }
         `}
       >
-        <Tabs defaultValue="general">
+        <Tabs defaultValue="general" className="w-full h-full">
           <TabsList className="grid w-full grid-cols-3 mb-5">
             <TabsTrigger value="general">
               {t('requests.general_tab')}
@@ -239,7 +239,7 @@ const RequestModal: React.FC<RequestModalProps> = ({ req, ...props }) => {
         <VisuallyHidden.Root>
           <DialogTitle>Request {req?.URL}</DialogTitle>
         </VisuallyHidden.Root>
-        <div className="pt-4">{content}</div>
+        <div className="pt-4 h-full flex flex-col">{content}</div>
       </DialogContent>
     </Dialog>
   ) : (
