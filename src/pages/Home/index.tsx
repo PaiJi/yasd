@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { css } from '@emotion/react'
 import { delay } from 'bluebird'
 import store from 'store2'
@@ -90,7 +90,7 @@ export const Component: React.FC = () => {
     if (link.startsWith('http')) {
       window.open(link, '_blank', 'noopener noreferrer')
     } else {
-      navigate(link)
+      void navigate(link)
     }
   }
 

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { Loader2Icon } from 'lucide-react'
 
 import CodeContent from '@/components/CodeContent'

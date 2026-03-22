@@ -3,7 +3,7 @@ import {
   createBrowserRouter,
   createHashRouter,
   RouterProvider as RouterProviderBase,
-} from 'react-router-dom'
+} from 'react-router'
 
 import App from '@/App'
 import AppContainer from '@/AppContainer'

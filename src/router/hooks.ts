@@ -1,5 +1,5 @@
 import { useContext, useMemo } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router'
 
 import { RouterContext } from './context'
 
