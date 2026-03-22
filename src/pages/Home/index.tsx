@@ -100,7 +100,7 @@ export const Component: React.FC = () => {
         padding-bottom: calc(env(safe-area-inset-bottom) + 1.25rem);
       `}
     >
-      <HorizontalSafeArea className="sticky top-0 flex shadow bg-white dark:bg-neutral-900 z-10 px-3 py-3">
+      <HorizontalSafeArea className="sticky top-0 z-10 flex px-3 py-2.5 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl backdrop-saturate-150 border-b border-black/5 dark:border-white/10">
         {profile && (
           <div className="w-full flex justify-between items-center">
             <div className="w-2/3" onDoubleClick={() => forceRefresh()}>
@@ -181,7 +181,7 @@ export const Component: React.FC = () => {
         </div>
       </HorizontalSafeArea>
 
-      <HorizontalSafeArea className="mt-6 px-4 lg:px-6 space-y-4 lg:space-y-6">
+      <HorizontalSafeArea className="mt-4 px-4 lg:px-6 space-y-4 lg:space-y-6">
         <div>
           <Events />
         </div>
