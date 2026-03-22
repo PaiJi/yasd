@@ -1,5 +1,14 @@
 /// <reference types="vite-plus/client" />
 
+import '@tanstack/react-table'
+
+declare module '@tanstack/react-table' {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  interface ColumnMeta<TData extends RowData, TValue> {
+    className?: string
+  }
+}
+
 interface ImportMetaEnv {
   readonly VITE_HASH_ROUTER?: string
   readonly VITE_HOST?: string

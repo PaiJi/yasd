@@ -123,6 +123,7 @@
     "request_header_title": "Request Header"
   },
   "traffic": {
+    "interfaces": "Interfaces",
     "start_time": "Start time",
     "uptime": "Uptime",
     "total": "Total",

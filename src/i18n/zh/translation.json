@@ -123,6 +123,7 @@
     "request_header_title": "请求头信息"
   },
   "traffic": {
+    "interfaces": "网络接口",
     "start_time": "开启时间",
     "uptime": "运行时长",
     "total": "总计",
