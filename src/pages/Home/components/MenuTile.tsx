@@ -1,17 +1,7 @@
 import React from 'react'
-import { css } from '@emotion/react'
-import styled from '@emotion/styled'
 import { ChevronRight } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardDescription,
-  CardTitle,
-} from '@/components/ui/card'
-import { TypographyH4 } from '@/components/ui/typography'
+import { cn } from '@/utils/shadcn'
 
 interface MenuTileProps {
   title: string
@@ -22,57 +12,68 @@ interface MenuTileProps {
 }
 
 const MenuTile: React.FC<MenuTileProps> = (props) => {
-  const handleClick = () => {
-    if (props.onClick) {
-      props.onClick()
-    }
-  }
+  const isClickable = !!props.onClick
 
   return (
-    <Card className="overflow-hidden">
-      <CardHeader
-        className="px-4 md:px-6 border-b border-gray-900/5 bg-muted space-y-4 justify-center"
-        css={css`
-          height: 3.8rem;
-        `}
-      >
-        <div className="flex items-center gap-8 justify-between">
-          <CardTitle className="truncate">{props.title}</CardTitle>
+    <div
+      role={isClickable ? 'button' : undefined}
+      tabIndex={isClickable ? 0 : undefined}
+      onClick={isClickable ? props.onClick : undefined}
+      onKeyDown={
+        isClickable
+          ? (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                props.onClick?.()
+              }
+            }
+          : undefined
+      }
+      className={cn(
+        'rounded-xl border border-border/70 bg-card text-card-foreground',
+        'h-full flex flex-col overflow-hidden',
+        'transition-colors duration-150',
+        isClickable && [
+          'cursor-pointer',
+          'hover:bg-accent/50 dark:hover:bg-white/4',
+          'active:bg-accent/80 dark:active:bg-white/7',
+          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50',
+        ],
+      )}
+    >
+      {/* Content zone */}
+      <div className="flex-1 px-4 py-3.5 md:px-5 md:py-4">
+        {/* Title row */}
+        <div className="flex items-center justify-between gap-3">
+          <h4 className="font-medium text-sm md:text-[0.9375rem] truncate leading-snug">
+            {props.title}
+          </h4>
+
+          {isClickable && (
+            <ChevronRight className="size-4 shrink-0 text-muted-foreground/60" />
+          )}
+        </div>
+
+        {/* Description */}
+        {props.description && (
+          <p className="mt-2 text-xs sm:text-[0.8125rem] text-muted-foreground leading-relaxed line-clamp-3">
+            {props.description}
+          </p>
+        )}
+      </div>
+
+      {/* Toggle zone — separated by thin rule, pinned to bottom */}
+      {props.switchElement && (
+        <div
+          className="bg-muted flex items-center justify-end px-4 py-2.5 md:px-5 border-t border-border/50"
+          onClick={(e) => e.stopPropagation()}
+          onKeyDown={(e) => e.stopPropagation()}
+        >
           {props.switchElement}
         </div>
-      </CardHeader>
-
-      <CardContent className="px-4 md:px-6 py-4 gap-0 h-[7.6rem] lg:h-[9rem]">
-        <div className="flex flex-col h-full justify-between gap-2 md:gap-4">
-          {props.description ? (
-            <CardDescription className="text-xs sm:text-sm line-clamp-3">
-              {props.description}
-            </CardDescription>
-          ) : (
-            <div />
-          )}
-
-          {props.onClick ? (
-            <div className="flex justify-end">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() => handleClick()}
-              >
-                <ChevronRight />
-              </Button>
-            </div>
-          ) : null}
-        </div>
-      </CardContent>
-    </Card>
+      )}
+    </div>
   )
-}
-
-export const MenuTileContent = styled.div``
-
-export const MenuTileTitle: React.FC<{ title: string }> = ({ title }) => {
-  return <TypographyH4 className="text-gray-800">{title}</TypographyH4>
 }
 
 export default MenuTile
