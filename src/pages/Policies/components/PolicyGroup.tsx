@@ -215,7 +215,7 @@ const PolicyGroup: React.FC<PolicyGroupProps> = ({
   }, [refreshSelection, isInViewport, selection])
 
   const cardInner = (
-    <div className="p-3 sm:p-4 grid gap-4 select-none">
+    <div className="px-3 sm:px-4 grid gap-4 select-none">
       <CardHeader className="p-0">
         <div className="flex flex-row justify-between items-center">
           <div className="scroll-m-20 text-md sm:text-xl font-bold">
@@ -240,7 +240,7 @@ const PolicyGroup: React.FC<PolicyGroupProps> = ({
             return (
               <div
                 className={cn(
-                  'flex flex-col bg-muted rounded-xl border shadow px-3 py-3 md:px-4 md:py-3 cursor-pointer hover:bg-neutral-100 dark:hover:bg-black/90 transition-colors ease-in-out duration-200 justify-between gap-2 md:gap-3',
+                  'flex flex-col bg-muted rounded-xl border px-3 py-3 md:px-4 md:py-3 cursor-pointer hover:bg-neutral-100 dark:hover:bg-black/90 transition-colors ease-in-out duration-200 justify-between gap-2 md:gap-3 ring-1 ring-black/[0.03] dark:ring-white/[0.04]',
                   selection === policy.name &&
                     'bg-blue-500 text-white hover:bg-blue-500 dark:hover:bg-blue-500',
                 )}
