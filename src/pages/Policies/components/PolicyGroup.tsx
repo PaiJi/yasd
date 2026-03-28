@@ -245,6 +245,7 @@ const PolicyGroup: React.FC<PolicyGroupProps> = ({
                     'bg-blue-500 text-white hover:bg-blue-500 dark:hover:bg-blue-500',
                 )}
                 key={policy.name}
+                data-policy-line-hash={policy.lineHash}
                 onClick={() => selectPolicy(policy.name)}
               >
                 <div>
