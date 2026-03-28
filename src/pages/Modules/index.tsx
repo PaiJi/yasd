@@ -12,8 +12,9 @@ import withProfile from '@/utils/with-profile'
 
 const ComponentBase: React.FC = () => {
   const { t } = useTranslation()
-  const { data: modules } = useSWR<Modules>('/modules', fetcher)
-  const [isLoading, setIsLoading] = useState(false)
+  const { data: modules, isLoading } = useSWR<Modules>('/modules', fetcher)
+  const [isModuleLoading, setIsModuleLoading] = useState(false)
+  const hasModules = !!modules?.available.length
 
   const isChecked = (name: string): boolean => {
     return modules?.enabled.includes(name) === true
@@ -21,7 +22,7 @@ const ComponentBase: React.FC = () => {
 
   const toggle = useCallback(
     (name: string, newVal: boolean) => {
-      setIsLoading(true)
+      setIsModuleLoading(true)
 
       fetcher({
         url: '/modules',
@@ -39,18 +40,26 @@ const ComponentBase: React.FC = () => {
           console.error(err)
         })
         .finally(() => {
-          setIsLoading(false)
+          setIsModuleLoading(false)
         })
     },
-    [setIsLoading, t],
+    [setIsModuleLoading, t],
   )
 
   return (
     <>
       <PageTitle title={t('home.modules')} />
 
+      {!isLoading && !hasModules ? (
+        <ListFullHeightCell>{t('modules.empty_list')}</ListFullHeightCell>
+      ) : isLoading ? (
+        <ListFullHeightCell>
+          {t('common.is_loading') + '...'}
+        </ListFullHeightCell>
+      ) : null}
+
       <div className="divide-y">
-        {modules &&
+        {hasModules &&
           modules.available.map((mod) => {
             return (
               <ListCell
@@ -60,7 +69,7 @@ const ComponentBase: React.FC = () => {
                 <div className="truncate leading-normal">{mod}</div>
                 <div className="flex items-center">
                   <Switch
-                    disabled={isLoading}
+                    disabled={isModuleLoading}
                     checked={isChecked(mod)}
                     onCheckedChange={(checked) => toggle(mod, checked)}
                   />
@@ -68,10 +77,6 @@ const ComponentBase: React.FC = () => {
               </ListCell>
             )
           })}
-
-        {modules && modules.available.length === 0 && (
-          <ListFullHeightCell>{t('modules.empty_list')}</ListFullHeightCell>
-        )}
       </div>
     </>
   )
