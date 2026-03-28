@@ -55,7 +55,7 @@ const TrafficCell: React.FC = () => {
   }
 
   return (
-    <div className="mx-4 lg:mx-6 rounded-xl border bg-card overflow-hidden">
+    <div className="mx-4 @3xl:mx-6 rounded-xl border bg-card overflow-hidden">
       <div className="p-2 pt-3 w-full overflow-hidden">
         <Suspense fallback={<LineChartLoader />}>
           <LineChart />
@@ -101,7 +101,12 @@ const Cell: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   className,
   ...props
 }) => {
-  return <div className={cn('px-4 py-4 md:px-5 md:py-5', className)} {...props} />
+  return (
+    <div
+      className={cn('px-4 py-4 @3xl:px-5 @3xl:py-5', className)}
+      {...props}
+    />
+  )
 }
 
 const Title: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
@@ -126,7 +131,7 @@ const Data: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
   return (
     <div
       className={cn(
-        'text-xl md:text-2xl text-foreground font-bold leading-normal tabular-nums tracking-tight',
+        'text-md @3xl:text-2xl text-foreground font-bold leading-normal tabular-nums tracking-tight',
         className,
       )}
       {...props}
