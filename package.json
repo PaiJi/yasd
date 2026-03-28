@@ -29,8 +29,8 @@
   "devDependencies": {
     "@codemirror/lang-javascript": "^6.2.5",
     "@codemirror/view": "^6.40.0",
-    "@commitlint/cli": "^17.8.1",
-    "@commitlint/config-angular": "^17.8.1",
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-angular": "^20.5.0",
     "@emotion/css": "^11.13.5",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
@@ -73,6 +73,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "codemirror": "^6.0.2",
+    "conventional-changelog-cli": "^5.0.0",
     "dayjs": "^1.11.20",
     "emotion-theming": "^11.0.0",
     "framer-motion": "^12.38.0",
