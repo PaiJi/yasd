@@ -96,6 +96,7 @@ export const Component: React.FC = () => {
 
   return (
     <div
+      className="@container"
       css={css`
         padding-bottom: calc(env(safe-area-inset-bottom) + 1.25rem);
       `}
@@ -120,12 +121,12 @@ export const Component: React.FC = () => {
         )}
       </HorizontalSafeArea>
 
-      <HorizontalSafeArea className="space-y-4 lg:space-y-6">
-        <div className="pt-4 lg:pt-6">
+      <HorizontalSafeArea className="space-y-4 @3xl:space-y-6">
+        <div className="pt-4 @3xl:pt-6">
           <TrafficCell />
         </div>
 
-        <div className="px-4 lg:px-6 space-y-4 lg:space-y-6">
+        <div className="px-4 @3xl:px-6 space-y-4 @3xl:space-y-6">
           <VersionSupport macos>
             <DataGroup>
               <DataRow>
@@ -150,7 +151,7 @@ export const Component: React.FC = () => {
             </DataGroup>
           </VersionSupport>
 
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+          <div className="grid grid-cols-2 @3xl:grid-cols-3 gap-4 @3xl:gap-6">
             {menu.map((item) => {
               if (
                 typeof item.isEnabled === 'function' &&
@@ -181,7 +182,7 @@ export const Component: React.FC = () => {
         </div>
       </HorizontalSafeArea>
 
-      <HorizontalSafeArea className="mt-4 px-4 lg:px-6 space-y-4 lg:space-y-6">
+      <HorizontalSafeArea className="mt-4 px-4 @3xl:px-6 space-y-4 @3xl:space-y-6">
         <div>
           <Events />
         </div>
