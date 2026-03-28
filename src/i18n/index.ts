@@ -17,11 +17,9 @@ void i18n
     },
     backend: {
       backends: [
-        resourcesToBackend((lng, ns, clb) => {
-          import(`./${lng}/${ns}.json`)
-            .then((resources) => clb(null, resources))
-            .catch((err) => clb(err, undefined))
-        }),
+        resourcesToBackend(
+          (lng: string, ns: string) => import(`./${lng}/${ns}.json`),
+        ),
       ],
     },
   })
