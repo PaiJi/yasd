@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router'
 import dayjs from 'dayjs'
 
+import { useSplitView } from '@/hooks/useSplitView'
 import { useAppDispatch, useProfile } from '@/store'
 import { trafficActions } from '@/store/slices/traffic'
 import { ConnectorTraffic, Traffic } from '@/types'
@@ -14,9 +15,12 @@ const useTrafficUpdater = () => {
   const profile = useProfile()
   const location = useLocation()
 
-  const isInForeground =
-    location.pathname === '/traffic' || location.pathname === '/home'
+  const { isSplitActive } = useSplitView()
 
+  const isInForeground =
+    location.pathname === '/traffic' ||
+    location.pathname === '/home' ||
+    isSplitActive
   useEffect(() => {
     if (profile === undefined) return
 

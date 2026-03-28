@@ -6,6 +6,7 @@ import Bootstrap from '@/bootstrap'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { UIProvider } from '@/components/UIProvider'
 import { SafeAreaInsetsProvider } from '@/hooks/useSafeAreaInsets'
+import { SplitViewProvider } from '@/hooks/useSplitView'
 import { store } from '@/store'
 
 const AppContainer: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -15,7 +16,9 @@ const AppContainer: React.FC<{ children: ReactNode }> = ({ children }) => {
         <ThemeProvider>
           <UIProvider>
             <SafeAreaInsetsProvider>
-              <Bootstrap>{children}</Bootstrap>
+              <SplitViewProvider>
+                <Bootstrap>{children}</Bootstrap>
+              </SplitViewProvider>
             </SafeAreaInsetsProvider>
           </UIProvider>
         </ThemeProvider>

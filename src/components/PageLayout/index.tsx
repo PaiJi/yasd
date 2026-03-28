@@ -2,7 +2,7 @@ import React from 'react'
 
 import FixedFullscreenContainer from '@/components/FixedFullscreenContainer'
 import PageContainer from '@/components/PageContainer'
-import { useSplitView } from '@/components/SplitViewLayout/context'
+import { useSplitView } from '@/hooks/useSplitView'
 import { useRouteOptions } from '@/router'
 import { cn } from '@/utils/shadcn'
 
