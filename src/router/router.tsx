@@ -3,7 +3,7 @@ import {
   createBrowserRouter,
   createHashRouter,
   RouterProvider as RouterProviderBase,
-} from 'react-router-dom'
+} from 'react-router'
 
 import App from '@/App'
 import AppContainer from '@/AppContainer'
@@ -14,7 +14,7 @@ import { RouterContext } from './context'
 import type { Route } from './types'
 
 const createRouter = (routes: Route[]) => {
-  return process.env.REACT_APP_HASH_ROUTER === 'true'
+  return import.meta.env.VITE_HASH_ROUTER === 'true'
     ? createHashRouter(routes)
     : createBrowserRouter(routes)
 }

@@ -73,7 +73,6 @@ const SorterPopover = ({
         onFocusOutside={onHide}
         onInteractOutside={onHide}
         onEscapeKeyDown={onHide}
-        className="w-80"
         onOpenAutoFocus={(e) => e.preventDefault()}
       >
         <div className="grid gap-4">

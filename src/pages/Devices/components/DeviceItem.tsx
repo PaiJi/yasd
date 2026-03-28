@@ -1,12 +1,12 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { css } from '@emotion/react'
 import bytes from 'bytes'
 import dayjs from 'dayjs'
 import { ChevronRight } from 'lucide-react'
 
-import ActionsModal, { Action } from '@/components/ActionsModal'
+import ActionsModal from '@/components/ActionsModal'
 import { DataRow, DataRowMain, DataRowSub } from '@/components/Data'
 import VersionSupport from '@/components/VersionSupport'
 import { useSurgeHost } from '@/store'
@@ -30,7 +30,7 @@ const DeviceItem = ({ device }: { device: DeviceInfo }): JSX.Element => {
         id: 'view_requests',
         title: 'devices.view_requests',
         onClick: () => {
-          navigate(`/requests?source=${device.displayIPAddress}`)
+          void navigate(`/requests?source=${device.displayIPAddress}`)
         },
       },
     ]

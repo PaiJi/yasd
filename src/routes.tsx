@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router'
 
 import { Component as HomePage } from '@/pages/Home'
 import { Component as LandingPage } from '@/pages/Landing'

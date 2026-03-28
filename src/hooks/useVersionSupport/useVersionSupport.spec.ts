@@ -1,17 +1,18 @@
-import { jest } from '@jest/globals'
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
+import { beforeEach, describe, expect, it, vi } from 'vite-plus/test'
 
-jest.unstable_mockModule('@/store', () => ({
-  usePlatform: jest.fn(),
-  usePlatformVersion: jest.fn(),
+import { usePlatform, usePlatformVersion } from '@/store'
+
+import { useVersionSupport } from './useVersionSupport'
+
+vi.mock('@/store', () => ({
+  usePlatform: vi.fn(),
+  usePlatformVersion: vi.fn(),
 }))
-
-const { usePlatform, usePlatformVersion } = await import('@/store')
-const { useVersionSupport } = await import('./useVersionSupport')
 
 describe('useVersionSupport', () => {
   beforeEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   describe.each`
@@ -25,8 +26,8 @@ describe('useVersionSupport', () => {
     'when platform is $platform and platformVersion is $platformVersion and macos is $macos and ios is $ios and tvos is $tvos',
     ({ platform, platformVersion, macos, ios, tvos, expected }: any) => {
       beforeEach(() => {
-        ;(usePlatform as jest.Mock).mockReturnValue(platform)
-        ;(usePlatformVersion as jest.Mock).mockReturnValue(platformVersion)
+        vi.mocked(usePlatform).mockReturnValue(platform)
+        vi.mocked(usePlatformVersion).mockReturnValue(platformVersion)
       })
 
       it('should work', () => {

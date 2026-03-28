@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { Location } from 'react-router-dom'
+import { Location } from 'react-router'
 
 import type { Route } from './types'
 

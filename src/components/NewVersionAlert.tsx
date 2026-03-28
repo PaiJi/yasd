@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dialog'
 import { LastUsedVersion } from '@/utils/constant'
 
-const currentVersion = process.env.REACT_APP_VERSION as string
+const currentVersion = import.meta.env.VITE_VERSION
 
 const NewVersionAlert: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)

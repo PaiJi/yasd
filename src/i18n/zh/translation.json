@@ -123,6 +123,7 @@
     "request_header_title": "请求头信息"
   },
   "traffic": {
+    "interfaces": "网络接口",
     "start_time": "开启时间",
     "uptime": "运行时长",
     "total": "总计",
@@ -158,7 +159,8 @@
     "dynamic": "动态记录",
     "static": "静态记录",
     "comment": "备注",
-    "view_dns": "查看 DNS 记录"
+    "view_dns": "查看 DNS 记录",
+    "search_domain": "搜索域名…"
   },
   "devices": {
     "mac_address": "MAC 地址",

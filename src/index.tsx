@@ -20,7 +20,7 @@ root.render(
   </React.StrictMode>,
 )
 
-if (process.env.REACT_APP_USE_SW === 'true') {
+if (import.meta.env.VITE_USE_SW === 'true') {
   // If you want your app to work offline and load faster, you can change
   // unregister() to register() below. Note this comes with some pitfalls.
   // Learn more about service workers: https://cra.link/PWA
@@ -35,7 +35,7 @@ if (process.env.REACT_APP_USE_SW === 'true') {
 
 if (!('scrollBehavior' in document.documentElement.style)) {
   // @ts-ignore
-  import('smoothscroll-polyfill').then((mod) => {
+  void import('smoothscroll-polyfill').then((mod) => {
     mod.polyfill()
   })
 }

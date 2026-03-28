@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { uniqBy } from 'lodash-es'
 import { Link2Icon } from 'lucide-react'
 import useSWR from 'swr'
@@ -71,7 +71,7 @@ const ComponentBase: React.FC = () => {
                     {script.type === 'cron' && (
                       <Button
                         onClick={() => {
-                          evaluate(script.name, index)
+                          void evaluate(script.name, index)
                         }}
                         isLoading={isLoading === index}
                         loadingLabel={t('scripting.running')}

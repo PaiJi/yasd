@@ -1,6 +1,5 @@
-import React, { createRef, RefObject, useRef } from 'react'
+import React, { createRef, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ScrollTo } from 'react-scroll-to'
 import { css } from '@emotion/react'
 import useSWR from 'swr'
 
@@ -33,88 +32,82 @@ export const Component: React.FC = () => {
   const headerRef = useRef<HTMLDivElement>(null)
   const { data: policyPerformanceResults } = usePolicyPerformance()
 
-  const getRefTop = (ref: RefObject<HTMLDivElement>): number => {
-    const ele = ref.current
-    const headerEle = headerRef.current
+  const scrollToRef = (index: number) => {
+    const target = refs[index].current
+    const header = headerRef.current
+    if (!target || !header) return
 
-    if (ele && headerEle) {
-      return ele.offsetTop - headerEle.clientHeight - 30
-    } else {
-      return 0
+    let scrollParent: Element | null = target.parentElement
+    while (scrollParent) {
+      const { overflowY } = getComputedStyle(scrollParent)
+      if (overflowY === 'auto' || overflowY === 'scroll') break
+      scrollParent = scrollParent.parentElement
     }
+
+    const container = scrollParent ?? document.documentElement
+    const offset = target.offsetTop - header.clientHeight - 30
+    container.scrollTo({ top: offset, behavior: 'smooth' })
   }
 
   return (
-    <ScrollTo>
-      {({ scroll }) => (
-        <>
-          <div
-            className="sticky top-0 left-0 right-0 shadow bg-white dark:bg-muted z-10 pt-3 sm:pt-5 mb-5"
-            ref={headerRef}
-          >
-            <div
-              css={css`
-                padding-left: env(safe-area-inset-left);
-                padding-right: env(safe-area-inset-right);
-              `}
-            >
-              <TypographyH3 className="px-4 my-0 py-0 border-none">
-                <div className="flex items-center">
-                  <BackButton title={t('home.policies')} />
-                </div>
-              </TypographyH3>
+    <>
+      <div
+        className="sticky top-0 left-0 right-0 bg-white/90 dark:bg-muted/90 backdrop-blur-md z-10 pt-3 sm:pt-5 mb-5 border-b border-black/5 dark:border-white/10"
+        ref={headerRef}
+      >
+        <div
+          css={css`
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+          `}
+        >
+          <TypographyH3 className="px-4 my-0 py-0 border-none">
+            <div className="flex items-center">
+              <BackButton title={t('home.policies')} />
             </div>
+          </TypographyH3>
+        </div>
 
-            <div
-              className="flex justify-start overflow-x-scroll pb-3 pt-4 sm:pb-4 space-x-3"
-              css={css`
-                padding-left: calc(env(safe-area-inset-left) + 1rem);
-                padding-right: calc(env(safe-area-inset-right) + 1rem);
-              `}
-            >
-              {policies &&
-                policies['policy-groups'].map((policy, index) => (
-                  <PolicyNameItem
-                    key={policy}
-                    onClick={() => {
-                      scroll({
-                        y: getRefTop(refs[index]),
-                        smooth: true,
-                      })
-                    }}
-                  >
-                    {policy}
-                  </PolicyNameItem>
-                ))}
-            </div>
-          </div>
+        <div
+          className="flex flex-wrap gap-2 pb-3 mt-4 sm:pb-4 sm:gap-2.5 max-h-32 sm:max-h-none overflow-y-auto"
+          css={css`
+            padding-left: calc(env(safe-area-inset-left) + 1rem);
+            padding-right: calc(env(safe-area-inset-right) + 1rem);
+          `}
+        >
+          {policies &&
+            policies['policy-groups'].map((policy, index) => (
+              <PolicyNameItem key={policy} onClick={() => scrollToRef(index)}>
+                {policy}
+              </PolicyNameItem>
+            ))}
+        </div>
+      </div>
 
-          <div
-            className="space-y-4"
-            css={css`
-              padding-left: calc(env(safe-area-inset-left) + 1rem);
-              padding-right: calc(env(safe-area-inset-right) + 1rem);
-            `}
-          >
-            {policies &&
-              policyGroups &&
-              policies['policy-groups'].map((policy, index) => {
-                return (
-                  <div key={policy} ref={refs[index]}>
-                    <PolicyGroup
-                      policyGroupName={policy}
-                      policyGroup={policyGroups[policy]}
-                      policyPerformanceResults={policyPerformanceResults}
-                    />
-                  </div>
-                )
-              })}
-          </div>
+      <div
+        className="space-y-4"
+        css={css`
+          padding-left: calc(env(safe-area-inset-left) + 1rem);
+          padding-right: calc(env(safe-area-inset-right) + 1rem);
+        `}
+      >
+        {policies &&
+          policyGroups &&
+          policies['policy-groups'].map((policy, index) => {
+            return (
+              <div key={policy} ref={refs[index]}>
+                <PolicyGroup
+                  policyGroupName={policy}
+                  policyGroup={policyGroups[policy]}
+                  policyPerformanceResults={policyPerformanceResults}
+                />
+              </div>
+            )
+          })}
+      </div>
 
-          <BottomSafeArea />
-        </>
-      )}
-    </ScrollTo>
+      <BottomSafeArea />
+    </>
   )
 }
 

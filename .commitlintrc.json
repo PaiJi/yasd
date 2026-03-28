@@ -4,9 +4,7 @@
   ],
   "rules": {
     "header-max-length": [
-      1,
-      "always",
-      72
+      0
     ],
     "type-enum": [
       2,
@@ -27,13 +25,7 @@
       ]
     ],
     "subject-case": [
-      2,
-      "always",
-      [
-        "sentence-case",
-        "start-case",
-        "lower-case"
-      ]
+      0
     ]
   }
 }

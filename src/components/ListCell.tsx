@@ -53,7 +53,7 @@ const ListFullHeightCell = ({
   return (
     <div
       className={cn(
-        'fixed top-0 bottom-0 left-0 right-0 flex justify-center items-center text-lg font-semibold text-gray-500 select-none',
+        'absolute top-0 bottom-0 left-0 right-0 flex justify-center items-center text-lg font-semibold text-gray-500 select-none',
         className,
       )}
       {...props}

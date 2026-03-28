@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react'
 import { toast } from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { css } from '@emotion/react'
 import { AxiosError } from 'axios'
 import { v4 as uuid } from 'uuid'
@@ -55,7 +55,7 @@ export const Component: React.FC = () => {
 
   const addHistory = useCallback(
     (profile: Profile): void => {
-      dispatch(
+      void dispatch(
         historyActions.addHistory({
           profile,
           remember: getValues('keepCredential'),
@@ -74,7 +74,7 @@ export const Component: React.FC = () => {
       dispatch(profileActions.update(profile))
 
       if (!isRunInSurge()) {
-        navigate('/home', { replace: true })
+        void navigate('/home', { replace: true })
       }
     },
     [dispatch, getValues, navigate],
@@ -82,7 +82,7 @@ export const Component: React.FC = () => {
 
   const deleteHistory = useCallback(
     (id: string) => {
-      dispatch(
+      void dispatch(
         historyActions.deleteHistory({
           id,
         }),
@@ -191,7 +191,7 @@ export const Component: React.FC = () => {
   useEffect(() => {
     if (isRunInSurge()) {
       if (profile) {
-        navigate('/home', { replace: true })
+        void navigate('/home', { replace: true })
       }
     }
   }, [navigate, profile])

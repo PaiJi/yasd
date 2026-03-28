@@ -12,10 +12,10 @@ const VersionTag = () => {
   )
 
   const content = isPlatformInfoShown
-    ? `v${process.env.REACT_APP_VERSION}` +
+    ? `v${import.meta.env.VITE_VERSION}` +
       '\n' +
       `${platform} v${platformVersion} (${platformBuild})`
-    : `v${process.env.REACT_APP_VERSION}`
+    : `v${import.meta.env.VITE_VERSION}`
 
   return (
     <span className="inline-block text-xs text-center">

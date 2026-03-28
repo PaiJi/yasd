@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { css } from '@emotion/react'
 import { delay } from 'bluebird'
 import store from 'store2'
@@ -44,7 +44,7 @@ export const Component: React.FC = () => {
 
   const toggleSystemProxy = useCallback(async () => {
     try {
-      fetcher({
+      await fetcher({
         method: 'POST',
         url: '/features/system_proxy',
         data: {
@@ -52,7 +52,7 @@ export const Component: React.FC = () => {
         },
       })
 
-      await delay(100)
+      await delay(800)
 
       await mutate('/features/system_proxy')
     } catch (err) {
@@ -70,7 +70,7 @@ export const Component: React.FC = () => {
         },
       })
 
-      await delay(100)
+      await delay(800)
 
       await mutate('/features/enhanced_mode')
     } catch (err) {
@@ -90,17 +90,18 @@ export const Component: React.FC = () => {
     if (link.startsWith('http')) {
       window.open(link, '_blank', 'noopener noreferrer')
     } else {
-      navigate(link)
+      void navigate(link)
     }
   }
 
   return (
     <div
+      className="@container"
       css={css`
         padding-bottom: calc(env(safe-area-inset-bottom) + 1.25rem);
       `}
     >
-      <HorizontalSafeArea className="sticky top-0 flex shadow bg-white dark:bg-neutral-900 z-10 px-3 py-3">
+      <HorizontalSafeArea className="sticky top-0 z-10 flex px-3 py-2.5 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl backdrop-saturate-150 border-b border-black/5 dark:border-white/10">
         {profile && (
           <div className="w-full flex justify-between items-center">
             <div className="w-2/3" onDoubleClick={() => forceRefresh()}>
@@ -120,12 +121,12 @@ export const Component: React.FC = () => {
         )}
       </HorizontalSafeArea>
 
-      <HorizontalSafeArea className="space-y-4 lg:space-y-6">
-        <div className="pt-4 lg:pt-6">
+      <HorizontalSafeArea className="space-y-4 @3xl:space-y-6">
+        <div className="pt-4 @3xl:pt-6">
           <TrafficCell />
         </div>
 
-        <div className="px-4 lg:px-6 space-y-4 lg:space-y-6">
+        <div className="px-4 @3xl:px-6 space-y-4 @3xl:space-y-6">
           <VersionSupport macos>
             <DataGroup>
               <DataRow>
@@ -150,7 +151,7 @@ export const Component: React.FC = () => {
             </DataGroup>
           </VersionSupport>
 
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+          <div className="grid grid-cols-2 @3xl:grid-cols-3 gap-4 @3xl:gap-6">
             {menu.map((item) => {
               if (
                 typeof item.isEnabled === 'function' &&
@@ -181,7 +182,7 @@ export const Component: React.FC = () => {
         </div>
       </HorizontalSafeArea>
 
-      <HorizontalSafeArea className="mt-6 px-4 lg:px-6 space-y-4 lg:space-y-6">
+      <HorizontalSafeArea className="mt-4 px-4 @3xl:px-6 space-y-4 @3xl:space-y-6">
         <div>
           <Events />
         </div>

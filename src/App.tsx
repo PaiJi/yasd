@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Toaster, toast } from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router'
 import { SWRConfig } from 'swr'
 
 import NetworkErrorModal from '@/components/NetworkErrorModal'
 import NewVersionAlert from '@/components/NewVersionAlert'
-import PageLayout from '@/components/PageLayout'
+import SplitViewLayout from '@/components/SplitViewLayout'
 import RunInSurge from '@/components/RunInSurge'
 import useTrafficUpdater from '@/hooks/useTrafficUpdater'
 import {
@@ -45,7 +45,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (history && !profile && location.pathname !== '/') {
-      navigate('/', { replace: true })
+      void navigate('/', { replace: true })
     }
   }, [history, location, navigate, profile])
 
@@ -108,9 +108,9 @@ const App: React.FC = () => {
         <NewVersionAlert />
       </RunInSurge>
 
-      <PageLayout>
+      <SplitViewLayout>
         <Outlet />
-      </PageLayout>
+      </SplitViewLayout>
     </SWRConfig>
   )
 }

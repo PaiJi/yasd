@@ -52,32 +52,21 @@ const useRequestsList = ({
   )
 
   const [{ requestList }, dispatch] = useRequestListReducer()
+
   const filteredRequestList = useMemo(() => {
     if (!requestList) {
       return undefined
     }
 
     return requestList
-      .filter((item) => {
-        return (
+      .filter(
+        (item) =>
           activeFilter(onlyActive, item) &&
           sourceIpFilter(sourceIp, item) &&
-          urlFilter(filter.urlFilter, item)
-        )
-      })
+          urlFilter(filter.urlFilter, item),
+      )
       .sort((a, b) => sorter(sortRule, a, b))
   }, [filter.urlFilter, onlyActive, requestList, sortRule, sourceIp])
-
-  useEffect(() => {
-    if (!recentRequests) {
-      return
-    }
-
-    dispatch({
-      type: RequestListActions.LOAD_REQUESTS,
-      payload: recentRequests.requests,
-    })
-  }, [recentRequests, dispatch])
 
   useEffect(() => {
     if (!recentRequests) {

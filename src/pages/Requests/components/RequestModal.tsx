@@ -2,14 +2,12 @@ import React, { useCallback, useMemo } from 'react'
 import { toast } from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
 import { css } from '@emotion/react'
-import styled from '@emotion/styled'
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden'
 import bytes from 'bytes'
 import dayjs from 'dayjs'
 import { Search } from 'lucide-react'
 import { basename } from 'path-browserify'
 import { mutate } from 'swr'
-import tw from 'twin.macro'
 import { useMediaQuery } from 'usehooks-ts'
 
 import CodeContent from '@/components/CodeContent'
@@ -27,9 +25,7 @@ import { RequestItem } from '@/types'
 import { isFalsy, isTruthy, onlyIP } from '@/utils'
 import fetcher from '@/utils/fetcher'
 
-const TabsContent = styled(TabsContentOriginal)`
-  ${tw``}
-`
+const TabsContent = TabsContentOriginal
 
 type RequestModalProps = {
   req: RequestItem | null
@@ -72,7 +68,7 @@ const RequestModal: React.FC<RequestModalProps> = ({ req, ...props }) => {
   const content = req ? (
     <>
       <div
-        className="flex-1 overflow-hidden"
+        className="flex-1 overflow-hidden flex"
         css={css`
           & > div {
             height: 100%;
@@ -82,7 +78,7 @@ const RequestModal: React.FC<RequestModalProps> = ({ req, ...props }) => {
           }
         `}
       >
-        <Tabs defaultValue="general">
+        <Tabs defaultValue="general" className="w-full h-full">
           <TabsList className="grid w-full grid-cols-3 mb-5">
             <TabsTrigger value="general">
               {t('requests.general_tab')}
@@ -239,11 +235,11 @@ const RequestModal: React.FC<RequestModalProps> = ({ req, ...props }) => {
 
   return isDesktop ? (
     <Dialog {...props}>
-      <DialogContent className="h-[90%] max-w-4xl flex flex-col pt-10">
+      <DialogContent className="h-[90%] sm:max-w-3xl flex flex-col pt-10">
         <VisuallyHidden.Root>
           <DialogTitle>Request {req?.URL}</DialogTitle>
         </VisuallyHidden.Root>
-        {content}
+        <div className="pt-4 h-full flex flex-col">{content}</div>
       </DialogContent>
     </Dialog>
   ) : (

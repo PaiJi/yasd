@@ -1,6 +1,9 @@
 /* global $ */
 
 ;(async () => {
-  await $`npx shadcn add ${process.argv[3]}`
-  await $`npx eslint --fix --ext .ts,.tsx ./src/components/ui`
-})()
+  await $`pnpm exec shadcn add ${process.argv[3]}`
+  await $`vp lint ./src/components/ui --fix`
+})().catch((error) => {
+  console.error(error)
+  process.exit(1)
+})

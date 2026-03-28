@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { Loader2Icon } from 'lucide-react'
 
 import CodeContent from '@/components/CodeContent'
@@ -138,7 +138,7 @@ export const Component = () => {
                 isValidatingCurrentProfileValidation
               }
               onClick={() => {
-                onReloadProfile()
+                void onReloadProfile()
               }}
               hideArrow
               destructive
@@ -199,7 +199,7 @@ export const Component = () => {
                 <DataRowMain
                   onClick={() => {
                     if (selectedProfile) {
-                      onSelectProfile(selectedProfile)
+                      void onSelectProfile(selectedProfile)
                     }
                   }}
                   destructive

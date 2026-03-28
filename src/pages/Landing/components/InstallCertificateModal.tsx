@@ -1,12 +1,9 @@
 import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import tw from 'twin.macro'
 
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog'
 import { TypographyP } from '@/components/ui/typography'
-
-const Li = tw.li`mt-2 space-y-2`
 
 const InstallCertificateModal: React.FC<{
   origin?: string
@@ -69,3 +66,15 @@ const InstallCertificateModal: React.FC<{
 }
 
 export default InstallCertificateModal
+
+const Li: React.FC<React.HTMLAttributes<HTMLLIElement>> = ({
+  className,
+  ...props
+}) => {
+  return (
+    <li
+      className={['mt-2 space-y-2', className].filter(Boolean).join(' ')}
+      {...props}
+    />
+  )
+}

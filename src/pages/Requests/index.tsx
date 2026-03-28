@@ -1,11 +1,9 @@
 import React, { useState, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useLocation } from 'react-router-dom'
-import { List, AutoSizer } from 'react-virtualized'
+import { useLocation } from 'react-router'
+import { List, AutoSizer, ListRowRenderer } from 'react-virtualized'
 import { css } from '@emotion/react'
 import { ActivityIcon, HistoryIcon } from 'lucide-react'
-import { ListRowRenderer } from 'react-virtualized/dist/es/List'
-import tw from 'twin.macro'
 
 import BottomPanel from '@/components/BottomPanel'
 import { ListCell } from '@/components/ListCell'
@@ -139,8 +137,13 @@ export const Component: React.FC = () => {
                     css={css`
                       outline: none;
 
-                      & > div {
-                        ${tw`divide-y divide-gray-200 dark:divide-white/10`}
+                      & > div > :not([hidden]) ~ :not([hidden]) {
+                        border-top-width: 1px;
+                        border-color: rgb(229 231 235 / 1);
+                      }
+
+                      .dark & > div > :not([hidden]) ~ :not([hidden]) {
+                        border-color: rgb(255 255 255 / 0.1);
                       }
                     `}
                   />
@@ -160,7 +163,7 @@ export const Component: React.FC = () => {
       </div>
 
       <BottomPanel className="divide-x select-none">
-        <div className="space-x-3 mr-3">{toggles}</div>
+        <div className="space-x-3 pr-3">{toggles}</div>
         <div className="space-x-3">
           <FilterPopover
             className="ml-3"

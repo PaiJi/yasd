@@ -123,6 +123,7 @@
     "request_header_title": "Request Header"
   },
   "traffic": {
+    "interfaces": "Interfaces",
     "start_time": "Start time",
     "uptime": "Uptime",
     "total": "Total",
@@ -158,7 +159,8 @@
     "dynamic": "Dynamic",
     "static": "Static",
     "comment": "Comment",
-    "view_dns": "Lookup DNS records"
+    "view_dns": "Lookup DNS records",
+    "search_domain": "Search domain..."
   },
   "devices": {
     "mac_address": "MAC Address",

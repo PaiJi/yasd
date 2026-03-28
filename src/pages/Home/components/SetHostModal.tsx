@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { find } from 'lodash-es'
 import { Laptop } from 'lucide-react'
 import store from 'store2'
@@ -49,7 +49,7 @@ const SetHostModal: React.FC = () => {
   const onAddNewProfile = useCallback(() => {
     dispatch(profileActions.clear())
     dispatch(trafficActions.clear())
-    navigate('/', { replace: true })
+    void navigate('/', { replace: true })
   }, [dispatch, navigate])
 
   useEffect(() => {

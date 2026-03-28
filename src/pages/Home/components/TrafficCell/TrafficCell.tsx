@@ -1,24 +1,15 @@
 import React, { lazy, Suspense, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { css } from '@emotion/react'
 import bytes from 'bytes'
-import tw from 'twin.macro'
 
 import { useInterfaces } from '@/store'
 import { ConnectorTraffic } from '@/types'
+import { cn } from '@/utils/shadcn'
 
 const LineChart = lazy(() => import('./components/LineChart'))
-const Cell = tw.div`px-4 py-3`
-const Title = tw.div`text-xs text-muted-foreground leading-relaxed`
-const Data = tw.div`text-base md:text-lg text-gray-700 dark:text-white/90 font-bold leading-normal tabular-nums`
 
 const LineChartLoader = () => (
-  <div
-    className="flex items-center justify-center text-sm text-gray-500"
-    css={css`
-      height: 200px;
-    `}
-  >
+  <div className="flex items-center justify-center text-sm text-muted-foreground h-[200px]">
     Loading...
   </div>
 )
@@ -49,9 +40,10 @@ const TrafficCell: React.FC = () => {
   }, [interfaces])
 
   const betterSpeedString = (speed: number, isCircular: boolean = true) => {
-    const readableString = bytes(speed, {
-      unitSeparator: '---',
-    })
+    const readableString =
+      bytes(speed, {
+        unitSeparator: '---',
+      }) ?? '0---B'
     const [value, unit] = readableString.split('---')
 
     return (
@@ -63,40 +55,28 @@ const TrafficCell: React.FC = () => {
   }
 
   return (
-    <div>
-      <div className="mb-3 w-full overflow-hidden">
+    <div className="mx-4 @3xl:mx-6 rounded-xl border bg-card overflow-hidden">
+      <div className="p-2 pt-3 w-full overflow-hidden">
         <Suspense fallback={<LineChartLoader />}>
           <LineChart />
         </Suspense>
       </div>
 
       {activeInterface ? (
-        <div className="grid grid-cols-3 gap-3 divide-x dark:divide-black/20 border-solid border-t border-b dark:border-gray-900 bg-muted">
-          <Cell
-            css={css`
-              padding-right: 0;
-            `}
-          >
+        <div className="grid grid-cols-3 bg-muted/50">
+          <Cell>
             <Title>{t('traffic_cell.upload')}</Title>
             <Data className="truncate">
               {betterSpeedString(activeInterface.outCurrentSpeed)}
             </Data>
           </Cell>
-          <Cell
-            css={css`
-              padding-right: 0;
-            `}
-          >
+          <Cell>
             <Title>{t('traffic_cell.download')}</Title>
             <Data className="truncate">
               {betterSpeedString(activeInterface.inCurrentSpeed)}
             </Data>
           </Cell>
-          <Cell
-            css={css`
-              padding-right: 0;
-            `}
-          >
+          <Cell>
             <Title>{t('traffic_cell.total')}</Title>
             <Data className="truncate">
               {betterSpeedString(
@@ -107,14 +87,7 @@ const TrafficCell: React.FC = () => {
           </Cell>
         </div>
       ) : (
-        <div
-          className="border border-gray-200 bg-gray-100 text-gray-700"
-          css={css`
-            height: 67px;
-            line-height: 67px;
-            text-align: center;
-          `}
-        >
+        <div className="flex items-center justify-center h-[67px] bg-muted/50 text-muted-foreground text-sm">
           {t('common.is_loading')}...
         </div>
       )}
@@ -123,3 +96,45 @@ const TrafficCell: React.FC = () => {
 }
 
 export default TrafficCell
+
+const Cell: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+  className,
+  ...props
+}) => {
+  return (
+    <div
+      className={cn('px-4 py-4 @3xl:px-5 @3xl:py-5', className)}
+      {...props}
+    />
+  )
+}
+
+const Title: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+  className,
+  ...props
+}) => {
+  return (
+    <div
+      className={cn(
+        'text-xs text-muted-foreground leading-relaxed uppercase tracking-wider font-medium',
+        className,
+      )}
+      {...props}
+    />
+  )
+}
+
+const Data: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
+  className,
+  ...props
+}) => {
+  return (
+    <div
+      className={cn(
+        'text-md @3xl:text-2xl text-foreground font-bold leading-normal tabular-nums tracking-tight',
+        className,
+      )}
+      {...props}
+    />
+  )
+}

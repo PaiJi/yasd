@@ -1,6 +1,5 @@
 import React, { memo } from 'react'
 import { css } from '@emotion/react'
-import tw from 'twin.macro'
 import { useMediaQuery } from 'usehooks-ts'
 
 import {
@@ -23,9 +22,22 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer'
+import { cn } from '@/utils/shadcn'
 
-const CustomDrawerContent = tw(DrawerContent)`px-6`
-const CustomDrawerHeader = tw(DrawerHeader)`px-0`
+const CustomDrawerContent = memo(function CustomDrawerContent({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof DrawerContent>) {
+  return <DrawerContent className={cn('px-6', className)} {...props} />
+})
+
+const CustomDrawerHeader = memo(function CustomDrawerHeader({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<typeof DrawerHeader>) {
+  return <DrawerHeader className={cn('px-0', className)} {...props} />
+})
+
 const CustomDrawerFooter = memo(function CustomDrawerFooter({
   children,
   ...props

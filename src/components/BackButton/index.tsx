@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { ChevronLeft } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'

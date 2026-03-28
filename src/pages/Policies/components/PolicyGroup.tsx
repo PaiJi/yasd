@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Loader2Icon, ZapIcon } from 'lucide-react'
-import tw from 'twin.macro'
 import useIsInViewport from 'use-is-in-viewport'
 
 import { StatusChip } from '@/components/StatusChip'
@@ -28,10 +27,6 @@ type LocalLatency = {
   latency: number
   error?: string | null
 }
-
-const LoadingOverlay = tw.div`
-  absolute top-0 right-0 bottom-0 left-0 bg-neutral-200 bg-opacity-90 flex items-center justify-center
-`
 
 const latencyResultStyle = (latency: number) => {
   if (latency < 0) {
@@ -207,7 +202,7 @@ const PolicyGroup: React.FC<PolicyGroupProps> = ({
     let isMounted = true
 
     if (isInViewport && !selection) {
-      refreshSelection().then((policy) => {
+      void refreshSelection().then((policy) => {
         if (isMounted) {
           setSelection(policy)
         }
@@ -220,7 +215,7 @@ const PolicyGroup: React.FC<PolicyGroupProps> = ({
   }, [refreshSelection, isInViewport, selection])
 
   const cardInner = (
-    <div className="p-3 sm:p-4 grid gap-4 select-none">
+    <div className="px-3 sm:px-4 grid gap-4 select-none">
       <CardHeader className="p-0">
         <div className="flex flex-row justify-between items-center">
           <div className="scroll-m-20 text-md sm:text-xl font-bold">
@@ -245,11 +240,12 @@ const PolicyGroup: React.FC<PolicyGroupProps> = ({
             return (
               <div
                 className={cn(
-                  'flex flex-col bg-muted rounded-xl border shadow px-3 py-3 md:px-4 md:py-3 cursor-pointer hover:bg-neutral-100 dark:hover:bg-black/90 transition-colors ease-in-out duration-200 justify-between gap-2 md:gap-3',
+                  'flex flex-col bg-muted rounded-xl border px-3 py-3 md:px-4 md:py-3 cursor-pointer hover:bg-neutral-100 dark:hover:bg-black/90 transition-colors ease-in-out duration-200 justify-between gap-2 md:gap-3 ring-1 ring-black/[0.03] dark:ring-white/[0.04]',
                   selection === policy.name &&
                     'bg-blue-500 text-white hover:bg-blue-500 dark:hover:bg-blue-500',
                 )}
                 key={policy.name}
+                data-policy-line-hash={policy.lineHash}
                 onClick={() => selectPolicy(policy.name)}
               >
                 <div>
@@ -293,9 +289,9 @@ const PolicyGroup: React.FC<PolicyGroupProps> = ({
     <div ref={targetRef}>
       <Card className="relative overflow-hidden">
         {isLoading ? (
-          <LoadingOverlay>
+          <div className="absolute inset-0 flex items-center justify-center bg-neutral-200/90">
             <Loader2Icon className="text-neutral-600 h-8 w-8 animate-spin" />
-          </LoadingOverlay>
+          </div>
         ) : null}
 
         {cardInner}

@@ -57,7 +57,7 @@ const ChangeLanguage = (): JSX.Element => {
     <Select
       value={i18n.language}
       onValueChange={(newVal) => {
-        onChange(newVal)
+        void onChange(newVal)
       }}
       disabled={isLoading}
     >

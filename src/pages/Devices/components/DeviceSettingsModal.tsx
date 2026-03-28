@@ -75,7 +75,7 @@ const DeviceSettingsModal = ({
         return
       }
 
-      ;(async () => {
+      void (async () => {
         setIsLoading(true)
 
         const payload: Record<string, unknown> = {}
@@ -111,7 +111,7 @@ const DeviceSettingsModal = ({
           return
         }
 
-        mutate('/devices')
+        await mutate('/devices')
         toast.success(t('common.success_interaction'))
         if (props.onOpenChange) {
           props.onOpenChange(false)
