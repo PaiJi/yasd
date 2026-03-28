@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useLocation } from 'react-router'
 
 import PageLayout from '@/components/PageLayout'
@@ -12,6 +12,16 @@ const SplitViewLayout: React.FC<{ children: React.ReactNode }> = ({
   const location = useLocation()
 
   const isHome = location.pathname === '/home'
+
+  useEffect(() => {
+    if (!isSplitActive) return
+
+    document.documentElement.style.overflow = 'hidden'
+
+    return () => {
+      document.documentElement.style.overflow = ''
+    }
+  }, [isSplitActive])
 
   if (!isSplitActive) {
     return <PageLayout>{children}</PageLayout>
