@@ -239,9 +239,6 @@ importers:
       react-scan:
         specifier: ^0.0.40
         version: 0.0.40(react-dom@19.2.4(react@19.2.4))(react-router-dom@6.30.3(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-router@7.13.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(rollup@2.80.0)
-      react-scroll-to:
-        specifier: 3.0.0-beta.6
-        version: 3.0.0-beta.6
       react-virtualized:
         specifier: ^9.22.6
         version: 9.22.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -5483,9 +5480,6 @@ packages:
         optional: true
       react-router-dom:
         optional: true
-
-  react-scroll-to@3.0.0-beta.6:
-    resolution: {integrity: sha512-uAx77bPqqYL7UIga0d+tcVXHpVmBzmBUGuy1AaiRUgNC7InzE/4qNxg0d4cxhlCh8ok6zBCQ82LzzmTcYIte/w==}
 
   react-style-singleton@2.2.3:
     resolution: {integrity: sha512-b6jSvxvVnyptAiLjbkWLE/lOnR4lfTtDAl+eUC7RZy+QQWc6wRzIV2CE6xBuMmDxc2qIihtDCZD5NPOFl7fRBQ==}
@@ -11778,8 +11772,6 @@ snapshots:
     transitivePeerDependencies:
       - rollup
       - supports-color
-
-  react-scroll-to@3.0.0-beta.6: {}
 
   react-style-singleton@2.2.3(@types/react@19.2.14)(react@19.2.4):
     dependencies:
