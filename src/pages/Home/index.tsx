@@ -52,7 +52,7 @@ export const Component: React.FC = () => {
         },
       })
 
-      await delay(100)
+      await delay(800)
 
       await mutate('/features/system_proxy')
     } catch (err) {
@@ -70,7 +70,7 @@ export const Component: React.FC = () => {
         },
       })
 
-      await delay(100)
+      await delay(800)
 
       await mutate('/features/enhanced_mode')
     } catch (err) {
