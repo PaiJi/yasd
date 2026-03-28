@@ -13,21 +13,24 @@ import DeviceItem from './components/DeviceItem'
 const ComponentBase = (): JSX.Element => {
   const { t } = useTranslation()
   const [isAutoRefresh, setIsAutoRefresh] = useState<boolean>(false)
-  const { data: devices } = useSWR<DevicesResult>('/devices', fetcher, {
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-    refreshInterval: isAutoRefresh ? 2000 : 0,
-  })
-
-  const deviceList = devices?.devices.length ? (
-    devices.devices.map((device) => (
-      <ListCell key={device.identifier}>
-        <DeviceItem device={device} />
-      </ListCell>
-    ))
-  ) : (
-    <ListFullHeightCell>{t('devices.empty_list')}</ListFullHeightCell>
+  const { data: devices, isLoading } = useSWR<DevicesResult>(
+    '/devices',
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      refreshInterval: isAutoRefresh ? 2000 : 0,
+    },
   )
+  const hasDevices = !!devices?.devices?.length
+
+  const deviceList = hasDevices
+    ? devices?.devices?.map((device) => (
+        <ListCell key={device?.identifier}>
+          <DeviceItem device={device} />
+        </ListCell>
+      ))
+    : null
 
   return (
     <>
@@ -38,15 +41,17 @@ const ComponentBase = (): JSX.Element => {
         onAutoRefreshStateChange={(newState) => setIsAutoRefresh(newState)}
       />
 
-      <div className="divide-y">
-        {!devices ? (
-          <ListFullHeightCell>
-            {t('common.is_loading') + '...'}
-          </ListFullHeightCell>
-        ) : (
-          deviceList
-        )}
-      </div>
+      {!hasDevices && !isLoading ? (
+        <ListFullHeightCell>{t('devices.empty_list')}</ListFullHeightCell>
+      ) : isLoading ? (
+        <ListFullHeightCell>
+          {t('common.is_loading') + '...'}
+        </ListFullHeightCell>
+      ) : null}
+
+      {hasDevices && !isLoading ? (
+        <div className="divide-y">{deviceList}</div>
+      ) : null}
     </>
   )
 }
