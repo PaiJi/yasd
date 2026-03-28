@@ -9,24 +9,28 @@ import { ConnectorTraffic, Traffic } from '@/types'
 import fetcher from '@/utils/fetcher'
 
 import { REFRESH_RATE } from './constants'
+import { useOnWindowFocus } from '../useOnWindowFocus'
 
 const useTrafficUpdater = () => {
   const dispatch = useAppDispatch()
   const profile = useProfile()
   const location = useLocation()
+  const isWindowFocused = useOnWindowFocus()
 
   const { isSplitActive } = useSplitView()
 
   const isInForeground =
-    location.pathname === '/traffic' ||
-    location.pathname === '/home' ||
-    isSplitActive
+    (location.pathname === '/traffic' ||
+      location.pathname === '/home' ||
+      isSplitActive) &&
+    isWindowFocused
+
   useEffect(() => {
     if (profile === undefined) return
 
     const fetchTraffic = () => {
-      void fetcher<Traffic & { nowTime: number }>({ url: '/traffic' }).then(
-        (res) => {
+      void fetcher<Traffic & { nowTime: number }>({ url: '/traffic' })
+        .then((res) => {
           res.nowTime = Date.now()
           dispatch(trafficActions.updateConnector(res.connector))
           dispatch(trafficActions.updateInterface(res.interface))
@@ -66,8 +70,8 @@ const useTrafficUpdater = () => {
               },
             }),
           )
-        },
-      )
+        })
+        .catch((err) => console.error(err))
     }
 
     const intervalId = setInterval(() => {
