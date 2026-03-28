@@ -6,7 +6,7 @@ import { SWRConfig } from 'swr'
 
 import NetworkErrorModal from '@/components/NetworkErrorModal'
 import NewVersionAlert from '@/components/NewVersionAlert'
-import PageLayout from '@/components/PageLayout'
+import SplitViewLayout from '@/components/SplitViewLayout'
 import RunInSurge from '@/components/RunInSurge'
 import useTrafficUpdater from '@/hooks/useTrafficUpdater'
 import {
@@ -108,9 +108,9 @@ const App: React.FC = () => {
         <NewVersionAlert />
       </RunInSurge>
 
-      <PageLayout>
+      <SplitViewLayout>
         <Outlet />
-      </PageLayout>
+      </SplitViewLayout>
     </SWRConfig>
   )
 }
