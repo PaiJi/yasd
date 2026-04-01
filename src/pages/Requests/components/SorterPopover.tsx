@@ -57,7 +57,7 @@ const SorterPopover = ({
       >
         <Button
           className={cn(
-            'space-x-2',
+            'space-x-1',
             hasSorter && 'bg-green-200 text-green-800 hover:bg-green-100',
             className,
           )}
@@ -65,7 +65,7 @@ const SorterPopover = ({
           variant="secondary"
         >
           {icon}
-          <span className="max-sm:hidden">{t('Sort')}</span>
+          <span>{t('Sort')}</span>
         </Button>
       </PopoverTrigger>
 

@@ -74,7 +74,7 @@ const FilterPopover: React.FC<FilterPopoverProps> = ({
       >
         <Button
           className={cn(
-            'space-x-2',
+            'space-x-1',
             hasFilter && 'bg-green-200 text-green-800 hover:bg-green-100',
             className,
           )}
@@ -82,7 +82,7 @@ const FilterPopover: React.FC<FilterPopoverProps> = ({
           variant="secondary"
         >
           <FilterIcon className="h-4 w-4" />
-          <span className="max-sm:hidden">{t('Filter')}</span>
+          <span>{t('Filter')}</span>
         </Button>
       </PopoverTrigger>
 
@@ -112,9 +112,10 @@ const FilterPopover: React.FC<FilterPopoverProps> = ({
                     <FormControl>
                       <Input
                         {...field}
-                        autoCorrect="off"
                         autoComplete="off"
+                        autoCorrect="off"
                         autoCapitalize="off"
+                        spellCheck={false}
                       />
                     </FormControl>
                   </FormItem>

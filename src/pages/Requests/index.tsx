@@ -99,7 +99,6 @@ export const Component: React.FC = () => {
     ] as const
   ).map((toggle) => (
     <Toggle
-      size="sm"
       key={toggle.value}
       pressed={group === toggle.value}
       onPressedChange={(pressed) => {
@@ -107,6 +106,7 @@ export const Component: React.FC = () => {
           setGroup(toggle.value)
         }
       }}
+      className="gap-1"
     >
       <toggle.icon className="mr-2 h-4 w-4" />
       {toggle.title}
@@ -162,11 +162,10 @@ export const Component: React.FC = () => {
         )}
       </div>
 
-      <BottomPanel className="divide-x select-none">
-        <div className="space-x-3 pr-3">{toggles}</div>
-        <div className="space-x-3">
+      <BottomPanel className="divide-x select-none space-x-3">
+        <div className="flex gap-3 pr-3">{toggles}</div>
+        <div className="flex gap-3">
           <FilterPopover
-            className="ml-3"
             filter={filter}
             onFilterRulesChange={onFilterRulesChange}
           />
@@ -175,7 +174,6 @@ export const Component: React.FC = () => {
             onSorterRulesChange={(sorter) => {
               setSorter(sorter)
             }}
-            className="ml-3"
           />
         </div>
       </BottomPanel>
