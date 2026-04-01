@@ -17,6 +17,7 @@ const SplitViewLayout: React.FC<{ children: React.ReactNode }> = ({
     if (!isSplitActive) return
 
     document.documentElement.style.overflow = 'hidden'
+    document.documentElement.scrollTop = 0
 
     return () => {
       document.documentElement.style.overflow = ''

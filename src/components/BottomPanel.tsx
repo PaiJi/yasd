@@ -17,7 +17,10 @@ const BottomPanel = ({
       `}
     >
       <div
-        className={cn('flex items-center border-t px-2 py-2', className)}
+        className={cn(
+          'flex items-center border-t border-black/5 dark:border-white/10 px-2 py-2',
+          className,
+        )}
         {...props}
       >
         {children}
