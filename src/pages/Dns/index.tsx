@@ -10,8 +10,8 @@ import BottomPanel from '@/components/BottomPanel'
 import { ListCell } from '@/components/ListCell'
 import PageTitle from '@/components/PageTitle'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { Toggle } from '@/components/ui/toggle'
+import DnsSearchPopover from './components/DnsSearchPopover'
 import { DnsResult } from '@/types'
 import fetcher from '@/utils/fetcher'
 import withProfile from '@/utils/with-profile'
@@ -187,12 +187,7 @@ const ComponentBase: React.FC = () => {
       <BottomPanel className="divide-x select-none">
         <div className="space-x-3 pr-3">{toggles}</div>
         <div className="flex items-center px-3">
-          <Input
-            className="h-7 w-40"
-            placeholder={t('dns.search_domain')}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+          <DnsSearchPopover search={search} onSearchChange={setSearch} />
         </div>
         <div className="flex items-center pl-3">
           <Button variant="outline" size="sm" onClick={() => flushDns()}>

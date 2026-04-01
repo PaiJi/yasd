@@ -160,7 +160,7 @@
     "static": "Static",
     "comment": "Comment",
     "view_dns": "Lookup DNS records",
-    "search_domain": "Search domain..."
+    "search_domain": "Search domain"
   },
   "devices": {
     "mac_address": "MAC Address",

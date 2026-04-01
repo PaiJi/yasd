@@ -54,6 +54,7 @@ const routes: RoutesConfig = {
       lazy: () => import('@/pages/Dns'),
       routeOptions: {
         fullscreen: true,
+        bottomSafeArea: false,
       },
     },
     {
