@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { Toaster, toast } from 'react-hot-toast'
+import { Toaster, toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
 import { Outlet, useLocation, useNavigate } from 'react-router'
 import { SWRConfig } from 'swr'
@@ -96,7 +96,7 @@ const App: React.FC = () => {
         refreshWhenOffline: true,
       }}
     >
-      <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-right" />
 
       <NetworkErrorModal
         reloadButton
