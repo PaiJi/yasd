@@ -1,4 +1,4 @@
-import { toast } from 'react-hot-toast'
+import { toast } from 'sonner'
 import axios, { AxiosRequestConfig } from 'axios'
 
 const client = axios.create({

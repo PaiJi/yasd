@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { useForm, useFormState } from 'react-hook-form'
-import { toast } from 'react-hot-toast'
+import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { to } from 'await-to-js'

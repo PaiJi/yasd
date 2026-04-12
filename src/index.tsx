@@ -1,5 +1,5 @@
 import React from 'react'
-import { toast } from 'react-hot-toast'
+import { toast } from 'sonner'
 import ReactDOM from 'react-dom/client'
 
 import './styles/shadcn.css'
@@ -26,7 +26,7 @@ if (import.meta.env.VITE_USE_SW === 'true') {
   // Learn more about service workers: https://cra.link/PWA
   serviceWorkerRegistration.register({
     onUpdate: (registration) => {
-      toast(() => <SWUpdateNotification registration={registration} />, {
+      toast(<SWUpdateNotification registration={registration} />, {
         duration: Number.POSITIVE_INFINITY,
       })
     },

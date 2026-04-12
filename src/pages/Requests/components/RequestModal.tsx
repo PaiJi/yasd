@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react'
-import { toast } from 'react-hot-toast'
+import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
 import { css } from '@emotion/react'
 import * as VisuallyHidden from '@radix-ui/react-visually-hidden'

@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { toast } from 'react-hot-toast'
+import { toast } from 'sonner'
 import { useTranslation } from 'react-i18next'
 import useSWR, { mutate } from 'swr'
 
