@@ -1,3 +1,10 @@
+## [3.0.4](https://github.com/geekdada/yasd/compare/v3.0.3...v3.0.4) (2026-04-12)
+
+
+### Features
+
+* **toast:** migrate from react-hot-toast to sonner ([45f0bf8](https://github.com/geekdada/yasd/commit/45f0bf88a376966743e1a0d19d99206e34ebc09b))
+
 ## [3.0.3](https://github.com/geekdada/yasd/compare/v3.0.2...v3.0.3) (2026-04-01)
 
 ## [3.0.2](https://github.com/geekdada/yasd/compare/v3.0.1...v3.0.2) (2026-03-28)
