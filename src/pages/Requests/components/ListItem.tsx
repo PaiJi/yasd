@@ -18,7 +18,7 @@ const ListItem: React.FC<{ req: RequestItem }> = ({ req }) => {
     <>
       <div className="text-sm truncate">{req.URL}</div>
       <div
-        className="flex items-center leading-none truncate"
+        className="flex items-center leading-none min-w-0"
         css={css`
           height: 1.5rem;
         `}
@@ -28,23 +28,23 @@ const ListItem: React.FC<{ req: RequestItem }> = ({ req }) => {
           failed={req.failed}
           status={req.status || ''}
         />
-        <div className="text-xs ml-1">#{req.id}</div>
-        <div className="text-xs ml-1">
+        <div className="text-xs ml-1 shrink-0">#{req.id}</div>
+        <div className="text-xs ml-1 shrink-0 hidden @sm:block">
           <span> - </span>
           <span>{dayjs.unix(req.startDate).format('HH:mm:ss')}</span>
         </div>
         {req.policyName ? (
-          <div className="text-xs ml-1">
+          <div className="text-xs ml-1 truncate min-w-0">
             <span> - </span>
             <span>{req.policyName}</span>
           </div>
         ) : null}
-        <div className="text-xs ml-1">
+        <div className="text-xs ml-1 shrink-0">
           <span> - </span>
           <span>{bytes(req.inBytes + req.outBytes)}</span>
         </div>
         {req.status ? (
-          <div className="text-xs ml-1">
+          <div className="text-xs ml-1 shrink-0">
             <span> - </span>
             <span>{t(`requests.${formatStatusKey(req.status)}`)}</span>
           </div>

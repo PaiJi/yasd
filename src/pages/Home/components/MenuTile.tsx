@@ -42,10 +42,10 @@ const MenuTile: React.FC<MenuTileProps> = (props) => {
       )}
     >
       {/* Content zone */}
-      <div className="flex-1 px-4 py-3.5 md:px-5 md:py-4">
+      <div className="flex-1 px-4 py-3.5 @md:px-5 @md:py-4">
         {/* Title row */}
         <div className="flex items-center justify-between gap-3">
-          <h4 className="font-medium text-sm md:text-[0.9375rem] truncate leading-snug">
+          <h4 className="font-medium text-sm @md:text-[0.9375rem] truncate leading-snug">
             {props.title}
           </h4>
 
@@ -65,7 +65,7 @@ const MenuTile: React.FC<MenuTileProps> = (props) => {
       {/* Toggle zone — separated by thin rule, pinned to bottom */}
       {props.switchElement && (
         <div
-          className="bg-muted flex items-center justify-end px-4 py-2.5 md:px-5 border-t border-border/50"
+          className="bg-muted flex items-center justify-end px-4 py-2.5 @md:px-5 border-t border-border/50"
           onClick={(e) => e.stopPropagation()}
           onKeyDown={(e) => e.stopPropagation()}
         >

@@ -25,7 +25,7 @@ const SplitViewLayout: React.FC<{ children: React.ReactNode }> = ({
   }, [isSplitActive])
 
   if (!isSplitActive) {
-    return <PageLayout>{children}</PageLayout>
+    return <PageLayout className="@container">{children}</PageLayout>
   }
 
   return (
