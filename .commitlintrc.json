@@ -1,11 +1,7 @@
 {
-  "extends": [
-    "@commitlint/config-angular"
-  ],
+  "extends": ["@commitlint/config-angular"],
   "rules": {
-    "header-max-length": [
-      0
-    ],
+    "header-max-length": [0],
     "type-enum": [
       2,
       "always",
@@ -24,8 +20,6 @@
         "sample"
       ]
     ],
-    "subject-case": [
-      0
-    ]
+    "subject-case": [0]
   }
 }
